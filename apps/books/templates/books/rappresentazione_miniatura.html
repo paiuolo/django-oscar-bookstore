@@ -1,0 +1,27 @@
+{% load reviews_tags %}
+{% load thumbnail %}
+{% load i18n %}
+{% load display_tags %}
+{% load staticfiles %}
+
+{% load purchase_info_tags %}
+{% load currency_filters %}
+{% load basket_tags %}
+
+{% block product %}
+    <article class="col-xs-6 col-sm-3 book miniatura {% for category in product.categories.all %} category-{{category.slug}} {% endfor %}">
+        <div class="book_image">
+        {% with image=product.primary_image %}
+            {% thumbnail image.original "x220" upscale=False as thumb %}
+                <a href="{{ product.get_absolute_url }}"><img src="{{ thumb.url }}" alt="{{ product.get_title }}"></a>
+            {% endthumbnail %}
+        {% endwith %}
+        </div>    
+        <div class="book_info">
+            {% block product_title %}
+                <h4><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}" class="book_title">{{ product.get_title|truncatewords:10|upper }}</a></h4>
+            {% endblock %}
+
+        </div>
+    </article>
+{% endblock %}

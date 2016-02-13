@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Authors" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li class="active">
+        {% trans "Authors" %}
+    </li>
+
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+{% for author in author_list %}
+
+<article class="author"><!-- Start of product page -->
+
+    <a href="{{ author.get_absolute_url }}"> <h2>{{author.name}}</h2> </a>
+    
+    <div class="author_description">
+    {{author.description|safe}}
+    </div>
+    
+</article><!-- End of author page -->
+{% endfor %}
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}

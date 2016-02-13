@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ bookstore.name }} | {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ bookstore.description|default:""|striptags }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li>
+        <a href="/books/bookstores" >{% trans "Bookstores" %}</a>
+    </li>
+    <li class="active">{{ bookstore.name }}</li>
+
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<article class="bookstore_page"><!-- Start of product page -->
+
+    <h1>{{bookstore.name}}</h1>
+    
+    <div class="bookstore-description">
+    {{bookstore.description|safe}}
+    </div>
+    
+    {% if bookstore.books.all|length > 0%}
+    <h3> {% trans "Books" %}: </h3>
+    <div class="row-fluid bookstore-books">
+        {% for product in bookstore.books.all %}
+            {% include "ayine/rappresentazione_miniatura.html" %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</article><!-- End of bookstore page -->
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}

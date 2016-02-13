@@ -1,0 +1,10 @@
+__pycache__
+db.sqlite3
+
+magazzino_virtuale/*
+!magazzino_virtuale/.placeholder
+
+public/static/*
+!public/static/.placeholder
+
+public/media/*/

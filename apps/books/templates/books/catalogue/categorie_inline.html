@@ -1,0 +1,11 @@
+{% with product.categories.all as categories %}
+{% if categories|length > 1 %}
+    <h4 class="book_cats">
+    {% for category in categories %}
+        {% if category.slug != 'livros' %}
+        <a class="cat-{{category.slug}}" href="{{category.get_absolute_url}}">{{category.name|upper}}</a>
+        {% endif %}
+    {% endfor %}
+    </h4>
+{% endif %}
+{% endwith %} 

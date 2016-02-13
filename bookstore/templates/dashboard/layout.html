@@ -1,0 +1,11 @@
+{% extends "oscar/dashboard/layout.html" %}
+
+{% load staticfiles %}
+
+{% block scripts %}
+{{ block.super }}
+
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+
+{% endblock %} 

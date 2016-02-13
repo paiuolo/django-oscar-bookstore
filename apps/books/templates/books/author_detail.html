@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ author.name }} | {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ author.description|default:""|striptags }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li>
+        <a href="/books/authors" >{% trans "Authors" %}</a>
+    </li>
+    <li class="active">{{ author.name }}</li>
+
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<article class="author_page"><!-- Start of product page -->
+
+    <h1>{{author.name}}</h1>
+    
+    <div class="author-description">
+    {{author.description|safe}}
+    </div>
+    
+    {% if author.books.all|length > 0%}
+    <h3> {% trans "Books" %}: </h3>
+    <div class="row-fluid author-books">
+        {% for product in author.books.all %}
+            {% if product.is_parent %}
+                {% include "books/rappresentazione_miniatura.html" %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</article><!-- End of author page -->
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {% trans "Bookstores" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li class="active">
+        {% trans "Bookstores" %}
+    </li>
+
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+{% for bookstore in bookstore_list %}
+
+<article class="bookstore"><!-- Start of product page -->
+
+    <a href="{{ bookstore.get_absolute_url }}"> <h2>{{bookstore.name}}</h2> </a>
+    
+    <div class="bookstore_description">
+    {{bookstore.description|safe}}
+    </div>
+    
+</article><!-- End of bookstore page -->
+{% endfor %}
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}

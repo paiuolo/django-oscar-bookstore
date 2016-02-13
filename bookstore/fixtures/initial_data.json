@@ -1,0 +1,69 @@
+[
+{
+   "model": "user.user",
+   "pk": 1,
+   "fields": {
+      "password": "pbkdf2_sha256$24000$f7mdUWH5AkDL$6blW1tv1H45zrjCHEf/VcpJNjhPZSbE3m798WYYy96o=",
+      "last_login": "2016-02-07T17:45:26.976Z",
+      "is_superuser": true,
+      "email": "paiuolo@gmail.com",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2016-01-30T22:15:18.284Z",
+      "newsletter_subscribed": true,
+      "groups": [],
+      "user_permissions": []
+   }
+},
+{
+   "model": "catalogue.productclass",
+   "pk": 1,
+   "fields": {
+      "name": "Book",
+      "slug": "book",
+      "requires_shipping": true,
+      "track_stock": false,
+      "options": []
+   }
+},
+{
+   "model": "books.bookformat",
+   "pk": 1,
+   "fields": {
+      "name": "Epub",
+      "description": "",
+      "virtual": true,
+      "slug": "epub"
+   }
+},
+{
+   "model": "books.bookformat",
+   "pk": 2,
+   "fields": {
+      "name": "Mobi",
+      "description": "",
+      "virtual": true,
+      "slug": "mobi"
+   }
+},
+{
+   "model": "books.bookformat",
+   "pk": 3,
+   "fields": {
+      "name": "Book",
+      "description": "",
+      "virtual": false,
+      "slug": "book"
+   }
+},
+{
+   "model": "partner.partner",
+   "pk": 1,
+   "fields": {
+      "code": "store",
+      "name": "Store",
+      "users": []
+   }
+}]

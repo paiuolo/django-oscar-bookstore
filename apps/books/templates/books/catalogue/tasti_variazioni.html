@@ -1,0 +1,43 @@
+{% load purchase_info_tags %}
+{% load basket_tags %}
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+{% load currency_filters %}
+
+{% for product in product.children.all %}
+    {% purchase_info_for_product request product as session %}
+    <div class="variazione_prodotto">
+    {% if not product.is_parent %}
+        {% if session.availability.is_available_to_buy %}
+            {% basket_form request product 'single' as basket_form %}
+            <form action="{% url 'basket:add' pk=product.pk %}" method="post">
+                {% csrf_token %}
+<!--                             {{ basket_form.as_p }} -->
+                <input name="quantity" type="hidden" value="1" />
+                <button type="submit" class="aggiungi_prodotto btn btn-lg" data-loading-text="{% trans 'Adding...' %}">+ <i class="glyphicon glyphicon-shopping-cart"></i>
+                
+                {% if session.price.exists %}
+                    {% if session.price.excl_tax == 0 %}
+                        {% trans "Free" %}
+                    {% elif session.price.is_tax_known %}
+                        {{ session.price.incl_tax|currency:session.price.currency }}
+                    {% else %}
+                        { session.price.excl_tax|currency:session.price.currency }}
+                    {% endif %}
+                {% else %}
+                    &nbsp;
+                {% endif %}
+                
+                ({{ product.form.name }})
+                </button>
+            </form>
+
+        {% else %}
+            <p class="disabled">{{ product.form.name }} <i class="glyphicon glyphicon-shopping-cart"></i></p>
+        {% endif %}
+    {% endif %}
+    </div>
+{% endfor %}
+

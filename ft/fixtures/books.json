@@ -1,0 +1,1 @@
+[{"model": "books.bookformat", "pk": 1, "fields": {"name": "Epub", "description": "", "virtual": true, "slug": "epub"}}, {"model": "books.bookformat", "pk": 2, "fields": {"name": "Mobi", "description": "", "virtual": true, "slug": "mobi"}}]

@@ -1,0 +1,11 @@
+{% with product.categories.all as categories %}
+{% if categories|length > 0 %}
+<div class="category-flash hidden-xs">
+{% for category in categories %}
+    {% if category.slug != 'books' and category.image %}
+    <img class="category-flash-{{category.slug}}" src="{{category.image.url}}" alt="{{category.name}}"/>
+    {% endif %}
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
