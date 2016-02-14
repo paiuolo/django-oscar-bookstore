@@ -29,6 +29,19 @@
    }
 },
 {
+    "model": "catalogue.category",
+    "pk": 1,
+    "fields": {
+        "path": "0001",
+        "depth": 1,
+        "numchild": 0,
+        "name": "Books",
+        "description": "",
+        "image": "",
+        "slug": "books"
+    }
+},
+{
    "model": "books.bookformat",
    "pk": 1,
    "fields": {
