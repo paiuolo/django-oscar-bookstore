@@ -138,12 +138,12 @@ class UsersTest(GenericTest):
         save_button = self.browser.find_element_by_xpath("//button[contains(.,'Save')]")
         save_button.click()
         
-        time.sleep(5)
+        #time.sleep(5)
         #vede che il campo è impostato a -
         self.corpo_non_contiene_testo('True')
         
         print('\n Fine test Utente')
-        time.sleep(10)
+        #time.sleep(10)
     
     
 

@@ -53,8 +53,7 @@ from oscar.views import handler500, handler404, handler403
 if settings.DEBUG:
     import debug_toolbar
     
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),

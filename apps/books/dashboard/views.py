@@ -10,7 +10,7 @@ from oscar.views.generic import BulkEditMixin
 from oscar.core.loading import get_classes, get_model
 
 from apps.books.models import Author, Serie, BookFormat, BookStore
-from apps.books.forms import AuthorForm, SerieForm, BookFormatForm, BookStoreForm
+from .forms import AuthorForm, SerieForm, BookFormatForm, BookStoreForm
 
 class AuthorListView(ListView):
     model = Author
@@ -24,7 +24,7 @@ class AuthorCreateView(CreateView):
     form_class = AuthorForm
 
     def get_success_url(self):
-        messages.warning(self.request, _("Author created"))
+        messages.success(self.request, _("Author created"))
         return reverse('dashboard:author-list')
 
     def get_context_data(self, **kwargs):
@@ -43,7 +43,7 @@ class AuthorUpdateView(UpdateView):
         return obj
 
     def get_success_url(self):
-        messages.warning(self.request, _("Author updated"))
+        messages.success(self.request, _("Author updated"))
         return reverse('dashboard:author-list')
 
     def get_context_data(self, **kwargs):
@@ -59,7 +59,7 @@ class AuthorDeleteView(DeleteView):
     context_object_name = 'author'
 
     def get_success_url(self):
-        messages.warning(self.request, _("Author deleted"))
+        messages.success(self.request, _("Author deleted"))
         return reverse('dashboard:author-list')
 
 
@@ -75,7 +75,7 @@ class SerieCreateView(CreateView):
     form_class = SerieForm
 
     def get_success_url(self):
-        messages.warning(self.request, _("Serie created"))
+        messages.success(self.request, _("Serie created"))
         return reverse('dashboard:serie-list')
 
     def get_context_data(self, **kwargs):
@@ -94,7 +94,7 @@ class SerieUpdateView(UpdateView):
         return obj
 
     def get_success_url(self):
-        messages.warning(self.request, _("Serie updated"))
+        messages.success(self.request, _("Serie updated"))
         return reverse('dashboard:serie-list')
 
     def get_context_data(self, **kwargs):
@@ -110,7 +110,7 @@ class SerieDeleteView(DeleteView):
     context_object_name = 'serie'
 
     def get_success_url(self):
-        messages.warning(self.request, _("Serie deleted"))
+        messages.success(self.request, _("Serie deleted"))
         return reverse('dashboard:serie-list')
     
 
@@ -126,8 +126,7 @@ class BookFormatCreateView(CreateView):
     form_class = BookFormatForm
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookformat created"))
-        #return reverse('dashboard:bookformat-list')
+        messages.success(self.request, _("Bookformat created"))
         return reverse('dashboard:bookformat-list')
 
     def get_context_data(self, **kwargs):
@@ -146,7 +145,7 @@ class BookFormatUpdateView(UpdateView):
         return obj
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookformat updated"))
+        messages.success(self.request, _("Bookformat updated"))
         return reverse('dashboard:bookformat-list')
 
     def get_context_data(self, **kwargs):
@@ -162,7 +161,7 @@ class BookFormatDeleteView(DeleteView):
     context_object_name = 'bookformat'
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookformat deleted"))
+        messages.success(self.request, _("Bookformat deleted"))
         return reverse('dashboard:bookformat-list')
     
     
@@ -180,7 +179,7 @@ class BookStoreCreateView(CreateView):
     form_class = BookStoreForm
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookstore created"))
+        messages.success(self.request, _("Bookstore created"))
         #return reverse('dashboard:bookstore-list')
         return reverse('dashboard:bookstore-list')
 
@@ -200,7 +199,7 @@ class BookStoreUpdateView(UpdateView):
         return obj
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookstore updated"))
+        messages.success(self.request, _("Bookstore updated"))
         return reverse('dashboard:bookstore-list')
 
     def get_context_data(self, **kwargs):
@@ -216,6 +215,6 @@ class BookStoreDeleteView(DeleteView):
     context_object_name = 'bookstore'
 
     def get_success_url(self):
-        messages.warning(self.request, _("Bookstore deleted"))
+        messages.success(self.request, _("Bookstore deleted"))
         return reverse('dashboard:bookstore-list')
     

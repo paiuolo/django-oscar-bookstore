@@ -8,7 +8,8 @@ import os
 
 from apps.books.models import Author, Serie, BookFormat, BookStore
 
-
+from django.utils import timezone
+from datetime import timedelta
 
 storage_magazzino_virtuale = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'magazzino_virtuale'))
 
@@ -31,7 +32,22 @@ class Product(AbstractProduct):
     
     background_color = models.CharField(max_length=7, blank=True, verbose_name=_("background color"))
     
-    file = models.FileField(blank=True, storage=storage_magazzino_virtuale) 
+    file = models.FileField(blank=True, storage=storage_magazzino_virtuale)
+    
+    publication_date = models.DateField(blank=True, null=True, verbose_name=_("publication date"))
+    
+    number_of_pages = models.PositiveIntegerField(blank=True, null=True)
+    
+    # will be modified by signals on offer creation or deletion 
+    has_offers = models.BooleanField(default=False) #noqa
+    
+    @property
+    def is_on_sale(self):
+        return self.has_offers
+    
+    @property
+    def is_new(self):
+        return (self.date_created + timedelta(getattr(settings, 'NEW_PRODUCT_DAYS', 30))) > timezone.now()
     
     @property
     def is_virtual(self):
@@ -82,6 +98,6 @@ class Product(AbstractProduct):
         if self.form:
             title += ' [{}]'.format(self.form.name)
         return title
-        
+
 
 from oscar.apps.catalogue.models import *  # noqa

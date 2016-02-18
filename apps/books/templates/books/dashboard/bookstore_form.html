@@ -28,15 +28,7 @@
 {% endblock %}
 
 {% block dashboard_content %}
-    <form action="." method="post" class="form-stacked well wysiwyg">
-        {% csrf_token %}
-        {% include "dashboard/partials/form_fields.html" with form=form %}
-        {% block form_actions %}
-            <div class="form-actions">
-                <button class="btn btn-primary btn-lg" type="submit" data-loading-text="{% trans 'Saving...' %}">{% trans "Save" %}</button>
-                {% trans "or" %}
-                <a href="{% url 'dashboard:bookstore-list' %}">{% trans "cancel" %}</a>
-            </div>
-        {% endblock form_actions %}
-    </form>
+    {% with ret_url='dashboard:bookstore-list' %}
+        {% include 'books/dashboard/partials/form.html' %}
+    {% endwith %}
 {% endblock dashboard_content %}

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView, View, TemplateView
 from django.views.generic.edit import FormView
 
-from .models import Author, BookStore
+from .models import Author, BookStore, Serie
 
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -21,7 +21,6 @@ class AuthorList(ListView):
     template_name = 'books/author_list.html'
 
 
-
 class BookStoreDetail(DetailView):
     model = BookStore
     template_name = 'books/bookstore_detail.html'
@@ -31,3 +30,10 @@ class BookStoreList(ListView):
     template_name = 'books/bookstore_list.html'
 
 
+class SerieDetail(DetailView):
+    model = Serie
+    template_name = 'books/serie_detail.html'
+
+class SerieList(ListView):
+    model = Serie
+    template_name = 'books/serie_list.html'

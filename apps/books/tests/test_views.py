@@ -23,6 +23,79 @@ OrderCreator = get_class('order.utils', 'OrderCreator')
 OrderTotalCalculator = get_class('checkout.calculators', 'OrderTotalCalculator')
 Partner = get_class('partner.models', 'Partner')
 StockRecord = get_class('partner.models', 'StockRecord')
+
+
+from django.conf import settings
+from apps.books.models import Author, Serie, BookFormat
+import os
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+from .test_utils import crea_modello
+
+
+class ImageModelTest():
+
+    def setUp(self):
+        self.test_image = SimpleUploadedFile(name=settings.OSCAR_MISSING_IMAGE_URL, content=open(os.path.join(settings.MEDIA_ROOT, 'images', settings.OSCAR_MISSING_IMAGE_URL), 'rb').read(), content_type='image/jpeg')
+    def tearDown(self):
+        for el in self.model.objects.all():
+            if el.image:
+                #print('Immagine rimasta', el, el.image, el.image.path)
+                os.remove( el.image.path )
+                
+    def test_detail_mostra_immagine(self):
+        el1 = crea_modello(self.model, name="{}_1".format(self.model.__name__), image=self.test_image)
+        response = self.client.get(el1.get_absolute_url())
+        self.assertEqual(response.context['object'].image, el1.image)
+
+
+# User views
+class AuthorTest(ImageModelTest, TestCase):
+    
+    model = Author
+    
+    def test_list_usa_giusto_template(self):
+        el1 = crea_modello(Author, name='Arg1')
+        response = self.client.get('/books/authors/')
+        self.assertTemplateUsed(response, 'books/author_list.html')
+    
+    def test_detail_usa_giusto_template(self):
+        el1 = crea_modello(Author, name='Arg1')
+        el1_url = el1.get_absolute_url()
+        response = self.client.get(el1_url)
+        self.assertTemplateUsed(response, 'books/author_detail.html')
+        
+        
+class SerieTest(ImageModelTest, TestCase):
+    
+    model = Serie
+    
+    def test_list_usa_giusto_template(self):
+        el1 = crea_modello(Serie, name='Arg1')
+        response = self.client.get('/books/series/')
+        self.assertTemplateUsed(response, 'books/serie_list.html')
+    
+    def test_detail_usa_giusto_template(self):
+        el1 = crea_modello(Serie, name='Arg1')
+        el1_url = el1.get_absolute_url()
+        response = self.client.get(el1_url)
+        self.assertTemplateUsed(response, 'books/serie_detail.html')
+    
+
+
+
+
+
+
+# Dashboard views
+class SerieDashboardTest(TestCase):
+    def test_vista_update_mostra_campo_image(self):
+        s = crea_modello(Serie, name="Serie1")
+        #!!da finire
+        print('modello serie', s)
+
+
+
 """
 
 def crea_ordine():

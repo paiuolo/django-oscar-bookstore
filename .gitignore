@@ -8,3 +8,6 @@ public/static/*
 !public/static/.placeholder
 
 public/media/*/
+bookstore/logs/
+
+migrations/

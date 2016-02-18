@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse
 from oscar.core.utils import slugify
 
 from ckeditor_uploader.fields import RichTextUploadingField
- 
+from django.conf import settings
+import os
     
     
 @python_2_unicode_compatible
@@ -15,6 +16,7 @@ class Author(models.Model):
     description = models.TextField(_('description'), blank=True)
     
     slug = models.SlugField(_('slug'), max_length=128, unique=True, blank=True)
+    image = models.ImageField(upload_to=os.path.join('images', 'series'), blank=True, null=True)
     
     class Meta:
         verbose_name_plural = _('authors')
@@ -42,17 +44,17 @@ class Author(models.Model):
             self.ensure_slug_uniqueness()
             super(Author, self).save(*args, **kwargs)
 
-    #def num_books(self):
-        #return self.books.count()
+    def num_books(self):
+        return self.books.count()
 
-    #def num_translations(self):
-        #return self.books_translated.count()
+    def num_translations(self):
+        return self.books_translated.count()
     
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('author_detail', kwargs={'pk': self.pk})
+        return reverse('author_detail', kwargs={'slug': self.slug})
 
 
 
@@ -62,6 +64,9 @@ class Serie(models.Model):
     description = models.TextField(_('Description'), blank=True)
     
     slug = models.SlugField(_('slug'), max_length=128, unique=True, blank=True)
+    
+    image = models.ImageField(upload_to=os.path.join('images', 'series'), max_length=255,
+        blank=True, null=True)
 
     def generate_slug(self):
         return slugify(self.name)
@@ -90,12 +95,14 @@ class Serie(models.Model):
     class Meta:
         verbose_name_plural = _('series')
         
-    #def num_books(self):
-        #return self.books.count()
+    def num_books(self):
+        return self.books.count()
     
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('serie_detail', kwargs={'slug': self.slug})
 
 
 

@@ -33,7 +33,7 @@
     
     <h2 class="book_authors">
     {% for author in product.authors.all %}
-        <a href="/books/authors/{{author.pk}}">{{author.name}}</a>
+        <a href="{{ author.get_absolute_url }}">{{author.name}}</a>
     {% endfor %}
     </h2>
     <h1>{{ product.get_title|upper }}</h1>
@@ -42,7 +42,7 @@
         <h4 class="book_traslation_authors">
         {% trans "Translation authors" %}:&nbsp;
         {% for author in product.translation_authors.all %}
-            <a href="/books/authors/{{author.pk}}">{{author.name}}</a>
+            <a href="{{ author.get_absolute_url }}">{{author.name}}</a>
         {% endfor %}
         </h4>
     {% endif %}
@@ -57,7 +57,10 @@
     
     <div class="variazioni_prodotto">
         {% include "books/catalogue/tasti_variazioni.html" %}
-        {% include "catalogue/partials/add_to_wishlist.html" %}
+        
+        {% if user.is_authenticated %}
+            {% include "catalogue/partials/add_to_wishlist.html" %}
+        {% endif %}
     </div> 
     
     {% block product_description %}
@@ -66,7 +69,16 @@
             {{ product.description|safe }}
             {% endif %}
         </div>
-    {% endblock %}  
+    {% endblock %}
+    
+    {% if product.is_new %}
+        <p>Is new!</p>
+    {% endif %}
+    
+    {% if product.is_on_sale %}
+        <p>Has offers!</p>
+    {% endif %}
+    
     
 </div><!-- /col-sm-6 -->
 {% endblock %}
