@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ serie.name }} | {{ block.super }}
+{% endblock %}
+
+{% block description %}
+    {{ serie.description|default:""|striptags }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+    <li>
+        <a href="/books/series" >{% trans "Bookstores" %}</a>
+    </li>
+    <li class="active">{{ serie.name }}</li>
+
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<article class="serie_page"><!-- Start of product page -->
+
+    <h1>{{serie.name}}</h1>
+    {% if serie.image %}
+        <img src="{{serie.image.url}}" alt="{{serie.name}}" />
+        
+    {% else %}
+        {{ serie.image }}
+    {% endif %}
+    <div class="serie-description">
+    {{serie.description|safe}}
+    </div>
+    
+    {% if serie.books.all|length > 0%}
+    <h3> {% trans "Books" %}: </h3>
+    <div class="row-fluid serie-books">
+        {% for product in serie.books.all %}
+            {% include "books/rappresentazione_miniatura.html" %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</article><!-- End of serie page -->
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}
