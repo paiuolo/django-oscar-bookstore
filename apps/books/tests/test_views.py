@@ -36,7 +36,7 @@ from .test_utils import crea_modello
 class ImageModelTest():
 
     def setUp(self):
-        self.test_image = SimpleUploadedFile(name=settings.OSCAR_MISSING_IMAGE_URL, content=open(os.path.join(settings.MEDIA_ROOT, 'images', settings.OSCAR_MISSING_IMAGE_URL), 'rb').read(), content_type='image/jpeg')
+        self.test_image = SimpleUploadedFile(name=settings.OSCAR_MISSING_IMAGE_URL, content=open(os.path.join(settings.MEDIA_ROOT, settings.OSCAR_MISSING_IMAGE_URL), 'rb').read(), content_type='image/jpeg')
     def tearDown(self):
         for el in self.model.objects.all():
             if el.image:

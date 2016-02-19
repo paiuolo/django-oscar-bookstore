@@ -67,6 +67,8 @@ class Serie(models.Model):
     
     image = models.ImageField(upload_to=os.path.join('images', 'series'), max_length=255,
         blank=True, null=True)
+    
+    background_color = models.CharField(max_length=9, blank=True, verbose_name=_("background color"))
 
     def generate_slug(self):
         return slugify(self.name)

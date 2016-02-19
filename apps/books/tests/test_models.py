@@ -61,6 +61,9 @@ class AuthorModelTest(ModelloNomeslugdescription, TestCase):
     def test_get_absolute_url(self):
         el = Author.objects.create(name='Pippo')
         self.assertEqual(el.get_absolute_url(), '/books/authors/{}/'.format(el.slug))
+        
+    def test_serie_ha_immagine(self):
+        image_field = Serie._meta.get_field('image')
 
 
 class BookStoreModelTest(ModelloNomeslugdescription, TestCase):
