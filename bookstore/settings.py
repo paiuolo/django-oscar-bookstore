@@ -68,7 +68,7 @@ INSTALLED_APPS = [
         'apps.checkout',
         'apps.customer',
         'apps.shipping',
-        
+        'apps.partner',
         
         'apps.dashboard',
         'apps.dashboard.catalogue',
