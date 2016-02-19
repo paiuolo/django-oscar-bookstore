@@ -62,8 +62,8 @@ class AuthorModelTest(ModelloNomeslugdescription, TestCase):
         el = Author.objects.create(name='Pippo')
         self.assertEqual(el.get_absolute_url(), '/books/authors/{}/'.format(el.slug))
         
-    def test_serie_ha_immagine(self):
-        image_field = Serie._meta.get_field('image')
+    def test_author_ha_immagine(self):
+        image_field = Author._meta.get_field('image')
 
 
 class BookStoreModelTest(ModelloNomeslugdescription, TestCase):
@@ -139,7 +139,7 @@ class ProductModelTest(TestCase):
         
         self.assertIsNone(el1.publication_date)
         
-    def test_serie_ha_background_color(self):
+    def test_prodotto_ha_background_color(self):
         image_field = Product._meta.get_field('background_color')
 
 
