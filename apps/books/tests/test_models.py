@@ -108,6 +108,9 @@ class SerieModelTest(ModelloNomeslugdescription, TestCase):
 
     def test_serie_ha_immagine(self):
         image_field = Serie._meta.get_field('image')
+        
+    def test_serie_ha_background_color(self):
+        image_field = Serie._meta.get_field('background_color')
 
 
 class ProductModelTest(TestCase):
@@ -123,13 +126,21 @@ class ProductModelTest(TestCase):
         
         self.assertFalse(el1.is_on_sale)
         
-    def test_prodotto_ha_pagine_e_pubdate(self):
+    def test_prodotto_ha_num_pagine(self):
+        t = ProductClass.objects.create(name="Books")
+        el1 = crea_modello(Product, title="Prod1", product_class=t)
+        
+        self.assertIsNone(el1.number_of_pages)
+        
+            
+    def test_prodotto_ha_pubdate(self):
         t = ProductClass.objects.create(name="Books")
         el1 = crea_modello(Product, title="Prod1", product_class=t)
         
         self.assertIsNone(el1.publication_date)
-        self.assertIsNone(el1.number_of_pages)
         
+    def test_serie_ha_background_color(self):
+        image_field = Product._meta.get_field('background_color')
 
 
 
