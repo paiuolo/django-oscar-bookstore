@@ -236,7 +236,7 @@ USE_LESS = False
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 
 
