@@ -30,7 +30,7 @@ class Product(AbstractProduct):
     form = models.ForeignKey(
         BookFormat, null=True, blank=True, related_name='books', verbose_name=_("format"))
     
-    background_color = models.CharField(max_length=7, blank=True, verbose_name=_("background color"))
+    background_color = models.CharField(max_length=9, blank=True, verbose_name=_("background color"))
     
     file = models.FileField(blank=True, storage=storage_magazzino_virtuale)
     
