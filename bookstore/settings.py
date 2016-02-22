@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
+import os
 
 from oscar.defaults import *
-import os
+from bookstore.domain_secrets import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,10 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm9+vr4ms0#g#9&!3^twq=j!yvmcgixn--_y+=hz*z63$y#uk3$'
+SECRET_KEY = DOMAIN_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Application definition
@@ -192,17 +194,16 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 APPEND_SLASH = True
-ALLOWED_HOSTS = ['.ayine.com.br',]
+ALLOWED_HOSTS = DOMAIN_ALLOWED_HOSTS
 
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = DOMAIN_LANGUAGE_CODE
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = DOMAIN_TIME_ZONE
 
 USE_I18N = True
 
@@ -210,11 +211,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-gettext_noop = lambda s: s
-LANGUAGES = [
-    ('en-us', gettext_noop('English')),
-    ('pt-br', gettext_noop('Brazilian Portuguese')),
-]
+LANGUAGES = DOMAIN_LANGUAGES
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -257,7 +254,7 @@ THUMBNAIL_KEY_PREFIX = 'oscar-sandbox'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_SUBJECT_PREFIX = '[Editora Ayiné] '
+EMAIL_SUBJECT_PREFIX = '[{}] '.format(DOMAIN_SHOP_NAME)
 # Email secrets
 from bookstore.email_secrets import *
 
@@ -273,17 +270,17 @@ CKEDITOR_CONFIGS = {
 
 
 # Oscar
-OSCAR_SHOP_NAME = 'Editora Ayiné'
-OSCAR_SHOP_TAGLINE = 'Bookstore'
+OSCAR_SHOP_NAME = DOMAIN_SHOP_NAME
+OSCAR_SHOP_TAGLINE = DOMAIN_SHOP_TAGLINE
 OSCAR_RECENTLY_VIEWED_PRODUCTS = 20
 OSCAR_ALLOW_ANON_CHECKOUT = True
 DISPLAY_VERSION = False
 
-OSCAR_DEFAULT_CURRENCY = 'BRL'
+OSCAR_DEFAULT_CURRENCY = DOMAIN_DEFAULT_CURRENCY
 
 OSCAR_ALLOW_ANON_REVIEWS = False
 
-OSCAR_FROM_EMAIL = 'info@ayine.com.br'
+OSCAR_FROM_EMAIL = DOMAIN_INFO_EMAIL
 OSCAR_HIDDEN_FEATURES = ['reviews']
 #OSCAR_HOMEPAGE
 
