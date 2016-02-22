@@ -16,7 +16,7 @@ ConditionalOffer = get_model('offer', 'ConditionalOffer')
 def create_twin_product_offer():
     
     try:
-        o1 = ConditionalOffer.objects.get(name='Remove twin products', offer_type=ConditionalOffer.SESSION)
+        o1 = ConditionalOffer.objects.get(slug='remove-twin-products')
     except:
         print('Modelli offer non presenti, li creo')
         # creare range
@@ -46,7 +46,7 @@ class Applicator(_Applicator):
     def get_session_offers(self, request):
         
         try:
-            o1 = ConditionalOffer.objects.get(name='Remove twin products')
+            o1 = ConditionalOffer.objects.get(slug='remove-twin-products')
         except:
             o1 = create_twin_product_offer()
         
