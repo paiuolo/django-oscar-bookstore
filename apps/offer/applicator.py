@@ -16,7 +16,7 @@ ConditionalOffer = get_model('offer', 'ConditionalOffer')
 def create_twin_product_offer():
     
     try:
-        o1 = ConditionalOffer.objects.get(name=_('Remove twin products'), offer_type=ConditionalOffer.SESSION)
+        o1 = ConditionalOffer.objects.get(name='Remove twin products', offer_type=ConditionalOffer.SESSION)
     except:
         print('Modelli offer non presenti, li creo')
         # creare range
@@ -35,7 +35,7 @@ def create_twin_product_offer():
         print('Benefit Preso?', b1)
         
         
-        o1, o1_new= ConditionalOffer.objects.get_or_create(name=_('Remove twin products'), condition=c1, benefit=b1, offer_type=ConditionalOffer.SESSION)
+        o1, o1_new= ConditionalOffer.objects.get_or_create(name='Remove twin products', condition=c1, benefit=b1, offer_type=ConditionalOffer.SESSION)
         print('Offer Preso?', o1, 'Nuova?', o1_new)
     
     return o1
