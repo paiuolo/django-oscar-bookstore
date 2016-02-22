@@ -12,7 +12,7 @@
     <article class="col-xs-6 col-sm-3 book miniatura {% for category in product.categories.all %} category-{{category.slug}} {% endfor %}">
         <div class="book_image">
         {% with image=product.primary_image %}
-            {% thumbnail image.original "x220" upscale=False as thumb %}
+            {% thumbnail image.original "x120" upscale=False as thumb %}
                 <a href="{{ product.get_absolute_url }}"><img src="{{ thumb.url }}" alt="{{ product.get_title }}"></a>
             {% endthumbnail %}
         {% endwith %}
@@ -21,7 +21,19 @@
             {% block product_title %}
                 <h4><a href="{{ product.get_absolute_url }}" title="{{ product.get_title }}" class="book_title">{{ product.get_title|truncatewords:10|upper }}</a></h4>
             {% endblock %}
-
+            {% block product_authors %}
+                <h5>
+                {% for author in product.authors.all %}
+                <a href="{{ author.get_absolute_url }}" title="{{ author.name }}" class="book_author">{{ author.name|upper }}</a>
+                {% endfor %}
+                </h5>
+            {% endblock %}
+            {% block product_addtocart%}
+            <a class="btn aggiungi_prodotto" href="{{product.get_absolute_url}}">
+                +<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;
+                {% trans 'Move to basket' %}
+            </a>
+            {% endblock %}
         </div>
     </article>
 {% endblock %}

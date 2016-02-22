@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% load staticfiles %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+
+
+{% block title %}
+    {{ digitalgood.date_created }} | {{ block.super }}
+{% endblock %}
+
+{% block body_class %}{% endblock %}
+
+{% block description %}
+    
+{% endblock %}
+
+
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li>
+        <a href="{{ homepage_url }}">{% trans "Home" %}</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<article class="serie_page"><!-- Start of product page -->
+
+    <h1>
+        {{digitalgood.user.email}}
+    </h1>
+
+    <h2>Scelta formato</h2>
+    
+</article><!-- End of serie page -->
+{% endblock content %}
+
+{% block extrascripts %}
+    {{ block.super }}
+{% endblock %}

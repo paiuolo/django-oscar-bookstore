@@ -86,7 +86,7 @@
 
                             </div>
                             <div class="col-sm-1">
-                                <p class="price_color align-right">
+                                <p class="price_color align-right hidden-xs">
                                     {% if line.is_tax_known %}
                                         {{ line.unit_price_incl_tax|currency:line.price_currency }}
                                     {% else %}

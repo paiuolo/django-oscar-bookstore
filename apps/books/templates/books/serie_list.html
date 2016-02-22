@@ -31,7 +31,14 @@
 
 <article class="serie"><!-- Start of product page -->
 
-    <a href="{{ serie.get_absolute_url }}"> <h2>{{serie.name}}</h2> </a>
+    <a href="{{ serie.get_absolute_url }}">
+        <h2>
+        {% if serie.image %}
+            <img src="{{serie.image.url}}" alt="{{serie.name}}" />
+        {% endif %}
+        {{serie.name}}
+        </h2>
+    </a>
     
     <div class="serie_description">
     {{serie.description|safe}}

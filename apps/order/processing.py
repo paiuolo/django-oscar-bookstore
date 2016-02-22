@@ -7,6 +7,7 @@ from oscar.core.loading import get_class
 
 #from apps.books.functions import send_order_via_email
 from apps.books.tasks import send_order_via_email
+from apps.books.models import DigitalGood
 
 ShippingEventType = get_class('order.models', 'ShippingEventType')
 
@@ -43,9 +44,10 @@ def manage_order_after_payment(sender, **kwargs):
     if order.is_anonymous:
         email_address = order.guest_email
     else:
+        dg = DigitalGood.objects.get_or_create(order=order, user=_user)
         email_address = _user.email
     
-    send_order_via_email.apply_async((order.user.email, order.number), countdown=10)
+    send_order_via_email.apply_async((email_address, order.number), countdown=10)
     
         
 order_placed.connect(manage_order_after_payment)

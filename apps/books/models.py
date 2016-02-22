@@ -8,6 +8,12 @@ from oscar.core.utils import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 import os
+
+from oscar.core.loading import get_class
+
+from apps.user.models import User
+
+Order = get_class('order.models', 'Order')
     
     
 @python_2_unicode_compatible
@@ -197,4 +203,22 @@ class BookStore(models.Model):
     def get_absolute_url(self):
         return reverse('bookstore_detail', kwargs={'pk': self.pk})
 
+
+
+@python_2_unicode_compatible
+class DigitalGood(models.Model):
+    date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
+    user = models.ForeignKey(User, verbose_name=_('User'))
+    order = models.ForeignKey(Order, verbose_name=_('Order'))
+    downloads_remaining = models.PositiveIntegerField(default=5)
+    log = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = _('Digital goods')
+    
+    def __str__(self):
+        return '{0}, {1}'.format(self.user.email, self.order.number)
+
+    def get_absolute_url(self):
+        return reverse('digital_goods', kwargs={'id': self.id})
 

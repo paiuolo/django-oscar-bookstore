@@ -25,7 +25,7 @@ SECRET_KEY = 'm9+vr4ms0#g#9&!3^twq=j!yvmcgixn--_y+=hz*z63$y#uk3$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Application definition
 from oscar import get_core_apps
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     
     'paypal',
     
-    'ft'
+    'ft',
     
 ] + get_core_apps(
     
@@ -74,6 +74,8 @@ INSTALLED_APPS = [
         'apps.dashboard.catalogue',
         
         'books.dashboard',
+        
+        'apps.offer'
      ]
     )
 
@@ -190,14 +192,15 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 APPEND_SLASH = True
-ALLOWED_HOSTS = ['localhost',]
+ALLOWED_HOSTS = ['.ayine.com.br',]
 
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -210,8 +213,7 @@ USE_TZ = True
 gettext_noop = lambda s: s
 LANGUAGES = [
     ('en-us', gettext_noop('English')),
-    #('pt-br', gettext_noop('Brazilian Portuguese')),
-    #('it', gettext_noop('Brazilian Portuguese')),
+    ('pt-br', gettext_noop('Brazilian Portuguese')),
 ]
 
 LOCALE_PATHS = (
@@ -232,12 +234,11 @@ STATICFILES_DIRS = (
 )
 
 
-USE_LESS = False
+USE_LESS = True
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
-COMPRESS_ENABLED = False
-
+COMPRESS_ENABLED = True
 
 
 HAYSTACK_CONNECTIONS = {
@@ -256,7 +257,7 @@ THUMBNAIL_KEY_PREFIX = 'oscar-sandbox'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_SUBJECT_PREFIX = '[Bookstore] '
+EMAIL_SUBJECT_PREFIX = '[Editora Ayiné] '
 # Email secrets
 from bookstore.email_secrets import *
 
@@ -272,17 +273,17 @@ CKEDITOR_CONFIGS = {
 
 
 # Oscar
-OSCAR_SHOP_NAME = 'Books'
+OSCAR_SHOP_NAME = 'Editora Ayiné'
 OSCAR_SHOP_TAGLINE = 'Bookstore'
 OSCAR_RECENTLY_VIEWED_PRODUCTS = 20
 OSCAR_ALLOW_ANON_CHECKOUT = True
 DISPLAY_VERSION = False
 
-OSCAR_DEFAULT_CURRENCY = 'EUR'
+OSCAR_DEFAULT_CURRENCY = 'BRL'
 
 OSCAR_ALLOW_ANON_REVIEWS = False
 
-OSCAR_FROM_EMAIL = 'info@xxx.xx'
+OSCAR_FROM_EMAIL = 'info@ayine.com.br'
 OSCAR_HIDDEN_FEATURES = ['reviews']
 #OSCAR_HOMEPAGE
 
@@ -352,7 +353,7 @@ OSCAR_DASHBOARD_NAVIGATION.append(
 PAYPAL_SANDBOX_MODE = True
 PAYPAL_CALLBACK_HTTPS = False
 PAYPAL_API_VERSION = '119'
-PAYPAL_CURRENCY = 'EUR'
+PAYPAL_CURRENCY = OSCAR_DEFAULT_CURRENCY
 PAYPAL_BRAND_NAME = OSCAR_SHOP_NAME
 #PAYPAL_HEADER_IMG = "https://"
 #PAYPAL_CUSTOMER_SERVICES_NUMBER = "xxxx"

@@ -10,18 +10,22 @@
     {{ serie.name }} | {{ block.super }}
 {% endblock %}
 
+{% block body_class %}{{ serie.slug }}{% endblock %}
+
 {% block description %}
     {{ serie.description|default:""|striptags }}
 {% endblock %}
+
+
 
 {% block breadcrumbs %}
 <ul class="breadcrumb">
     <li>
         <a href="{{ homepage_url }}">{% trans "Home" %}</a>
     </li>
-    <li>
-        <a href="/books/series" >{% trans "Bookstores" %}</a>
-    </li>
+<!--    <li>
+        <a href="/books/series/" >{% trans "Series" %}</a>
+    </li>-->
     <li class="active">{{ serie.name }}</li>
 
 </ul>
@@ -34,13 +38,11 @@
 
 <article class="serie_page"><!-- Start of product page -->
 
-    <h1>{{serie.name}}</h1>
-    {% if serie.image %}
-        <img src="{{serie.image.url}}" alt="{{serie.name}}" />
-        
-    {% else %}
-        {{ serie.image }}
-    {% endif %}
+    <h1>
+        {{serie.name}}
+    </h1>
+
+    
     <div class="serie-description">
     {{serie.description|safe}}
     </div>
@@ -49,7 +51,7 @@
     <h3> {% trans "Books" %}: </h3>
     <div class="row-fluid serie-books">
         {% for product in serie.books.all %}
-            {% include "books/rappresentazione_miniatura.html" %}
+            {% include "ayine/rappresentazione_class.html" %}
         {% endfor %}
     </div>
     {% endif %}

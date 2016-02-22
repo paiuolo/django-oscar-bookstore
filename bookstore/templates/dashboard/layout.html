@@ -1,6 +1,14 @@
 {% extends "oscar/dashboard/layout.html" %}
 
 {% load staticfiles %}
+{% load compress %}
+
+
+
+{% block styles %}
+        <link rel="stylesheet" type="text/css" href="{% static "oscar/css/dashboard.css" %}" />
+{% endblock %}
+
 
 {% block scripts %}
 {{ block.super }}
