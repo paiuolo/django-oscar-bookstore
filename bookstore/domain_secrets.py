@@ -1,6 +1,6 @@
 DOMAIN_SECRET_KEY='m9+vr4ms0#g#9&!3^twq=j!yvmcgixn--_y+=hz*z63$y#uk3$'
 
-DOMAIN_ALLOWED_HOSTS ['.example.com',]
+DOMAIN_ALLOWED_HOSTS = ['.example.com',]
 
 DOMAIN_TIME_ZONE = 'UTC'
 
