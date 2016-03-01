@@ -16,7 +16,7 @@ class EventHandler(_EventHandler):
     
     def handle_order_status_change(self, order, new_status, note_msg=None):
         
-        print("\nCambiato stato ordine:", new_status)
+        #print("\nCambiato stato ordine:", new_status)
         
         super(EventHandler, self).handle_order_status_change(order, new_status, note_msg)
         
@@ -24,7 +24,7 @@ class EventHandler(_EventHandler):
     def handle_payment_event(self, order, event_type, amount, lines=None,
                              line_quantities=None, **kwargs):
         
-        print("\nEvento pagamento", event_type, amount)
+        #print("\nEvento pagamento", event_type, amount)
         
         super(EventHandler, self).handle_payment_event(order, event_type, amount, lines, line_quantities, **kwargs)
 
@@ -34,7 +34,7 @@ class EventHandler(_EventHandler):
 
 
 def manage_order_after_payment(sender, **kwargs):
-    print("\n Ordine piazzato!")
+    #print("\n Ordine piazzato!")
     
     _user = kwargs.get('user')
     order = kwargs.get('order')
@@ -48,6 +48,7 @@ def manage_order_after_payment(sender, **kwargs):
         email_address = _user.email
     
     send_order_via_email.apply_async((email_address, order.number), countdown=10)
+    send_order_via_email(email_address, order.number)
     
         
 order_placed.connect(manage_order_after_payment)

@@ -65,11 +65,21 @@
    "model": "books.bookformat",
    "pk": 3,
    "fields": {
+      "name": "PDF",
+      "description": "",
+      "virtual": false,
+      "slug": "pdf"
+   }
+},
+{
+   "model": "books.bookformat",
+   "pk": 4,
+   "fields": {
       "name": "Book",
       "description": "",
       "virtual": false,
       "slug": "book"
-   }
+    }
 },
 {
    "model": "partner.partner",
@@ -79,4 +89,82 @@
       "name": "Store",
       "users": []
    }
-}]
+},
+{
+    "model": "offer.conditionaloffer",
+    "pk": 1,
+    "fields": {
+        "name": "Remove twin products",
+        "slug": "remove-twin-products",
+        "description": "",
+        "offer_type": "Session",
+        "status": "Open",
+        "condition": 1,
+        "benefit": 1,
+        "priority": 0,
+        "start_datetime": null,
+        "end_datetime": null,
+        "max_global_applications": null,
+        "max_user_applications": null,
+        "max_basket_applications": null,
+        "max_discount": null,
+        "total_discount": "0.00",
+        "num_applications": 0,
+        "num_orders": 0,
+        "redirect_url": "",
+        "date_created": "2016-02-22T18:51:12.379Z"
+    }
+},
+{
+    "model": "offer.benefit",
+    "pk": 1,
+    "fields": {
+        "range": 1,
+        "type": "Percentage",
+        "value": "100.00",
+        "max_affected_items": null,
+        "proxy_class": "apps.offer.models.FreeTwinDigitalProducts"
+    }
+},
+{
+    "model": "offer.condition",
+    "pk": 1,
+    "fields": {
+        "range": 1,
+        "type": "Coverage",
+        "value": "1.00",
+        "proxy_class": "apps.offer.models.CheckTwinDigitalProducts"
+    }
+},
+{
+    "model": "offer.range",
+    "pk": 1,
+    "fields": {
+        "name": "All products",
+        "slug": "all-products",
+        "description": "",
+        "is_public": false,
+        "includes_all_products": false,
+        "proxy_class": "apps.offer.models.AllProductsRange",
+        "date_created": "2016-02-22T18:51:12.340Z",
+        "excluded_products": [],
+        "classes": [],
+        "included_categories": []
+    }
+},
+{
+    "model": "customer.communicationeventtype",
+    "pk": 1,
+    "fields": {
+        "code": "ORDER_PLACED",
+        "name": "Order Placed",
+        "category": "Order related",
+        "email_subject_template": "",
+        "email_body_template": "",
+        "email_body_html_template": "",
+        "sms_template": "",
+        "date_created": "2016-02-22T20:17:07.288Z",
+        "date_updated": "2016-02-22T20:17:07.289Z"
+    }
+}
+]
