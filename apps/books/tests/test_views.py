@@ -30,6 +30,10 @@ from apps.books.models import Author, Serie, BookFormat
 import os
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from django.core.urlresolvers import reverse
+from django.utils import timezone
+from datetime import timedelta
+
 from .test_utils import crea_modello
 
 
@@ -47,6 +51,8 @@ class ImageModelTest():
         el1 = crea_modello(self.model, name="{}_1".format(self.model.__name__), image=self.test_image)
         response = self.client.get(el1.get_absolute_url())
         self.assertEqual(response.context['object'].image, el1.image)
+
+
 
 
 # User views
@@ -85,6 +91,29 @@ class SerieTest(ImageModelTest, TestCase):
 
 
 
+class ProductTest(TestCase):
+    fixtures = ['test_models.json']
+    
+    @classmethod
+    def setUpTestData(cls):
+        cls.product_class = ProductClass.objects.get(name="Book")
+        cls.product = crea_modello(Product, title="Prod1", product_class=cls.product_class, publication_date=timezone.now())
+    
+    def test_product_detail_does_not_show_price_before_pubdate(self):
+        response = self.client.get(self.product.get_absolute_url())
+        self.assertNotContains(response, 'variazione_prodotto')
+        
+    def test_product_detail_show_pubdate_before_pubdate(self):
+        p = crea_modello(Product, title="Prod1", product_class=self.product_class, publication_date=timezone.now()+timedelta(30))
+        response = self.client.get(p.get_absolute_url())
+        self.assertContains(response, 'data_pubblicazione_prodotto')
+        
+
+
+
+
+
+"""
 
 
 # Dashboard views
@@ -96,7 +125,6 @@ class SerieDashboardTest(TestCase):
 
 
 
-"""
 
 def crea_ordine():
 

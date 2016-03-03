@@ -34,7 +34,7 @@ class Product(AbstractProduct):
     
     file = models.FileField(blank=True, storage=storage_magazzino_virtuale)
     
-    publication_date = models.DateField(blank=True, null=True, verbose_name=_("publication date"))
+    publication_date = models.DateTimeField(blank=True, null=True, verbose_name=_("publication date"))
     
     number_of_pages = models.PositiveIntegerField(blank=True, null=True)
     
@@ -44,10 +44,6 @@ class Product(AbstractProduct):
     @property
     def is_on_sale(self):
         return self.has_offers
-    
-    @property
-    def is_new(self):
-        return (self.date_created + timedelta(getattr(settings, 'NEW_PRODUCT_DAYS', 30))) > timezone.now()
     
     @property
     def is_virtual(self):
@@ -61,6 +57,20 @@ class Product(AbstractProduct):
         if self.is_virtual:
             return False
         return spedizione_richiesta
+    
+    @property
+    def is_published(self):
+        if self.publication_date:
+            return timezone.now() >= self.publication_date
+        return True
+    
+    @property
+    def is_new(self):
+        if self.is_published:
+            if self.publication_date:
+                return (self.publication_date + timedelta(getattr(settings, 'NEW_PRODUCT_DAYS', 30))) > timezone.now()
+            return (self.date_created + timedelta(getattr(settings, 'NEW_PRODUCT_DAYS', 30))) > timezone.now()
+        return False
 
     def primary_image(self):
         """

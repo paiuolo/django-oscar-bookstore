@@ -1,0 +1,183 @@
+[
+{
+    "model": "catalogue.product",
+    "pk": 2,
+    "fields": {
+        "structure": "parent",
+        "upc": "",
+        "parent": null,
+        "title": "Libro 1",
+        "slug": "libro-1",
+        "description": "",
+        "product_class": 1,
+        "rating": null,
+        "date_created": "2016-02-22T18:44:16.043Z",
+        "date_updated": "2016-03-03T17:45:10.164Z",
+        "is_discountable": true,
+        "serie": 1,
+        "form": null,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [
+            1
+        ],
+        "bookstores": [],
+        "translation_authors": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 3,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 2,
+        "title": "",
+        "slug": "libro-1-epub",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-02-22T18:44:38.427Z",
+        "date_updated": "2016-02-22T18:44:38.427Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 1,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 4,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 2,
+        "title": "",
+        "slug": "libro-1-mobi",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-02-22T18:51:52.926Z",
+        "date_updated": "2016-02-22T18:51:52.926Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 2,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.productclass",
+    "pk": 1,
+    "fields": {
+        "name": "Book",
+        "slug": "book",
+        "requires_shipping": true,
+        "track_stock": false,
+        "options": []
+    }
+},
+{
+    "model": "catalogue.category",
+    "pk": 1,
+    "fields": {
+        "path": "0001",
+        "depth": 1,
+        "numchild": 0,
+        "name": "Books",
+        "description": "",
+        "image": "",
+        "slug": "books"
+    }
+},
+{
+    "model": "catalogue.productcategory",
+    "pk": 1,
+    "fields": {
+        "product": 2,
+        "category": 1
+    }
+},
+{
+    "model": "books.author",
+    "pk": 1,
+    "fields": {
+        "name": "Author1",
+        "description": "",
+        "slug": "author1",
+        "image": ""
+    }
+},
+{
+    "model": "books.serie",
+    "pk": 1,
+    "fields": {
+        "name": "Serie1",
+        "description": "",
+        "slug": "serie1",
+        "image": "",
+        "background_color": ""
+    }
+},
+{
+    "model": "books.bookformat",
+    "pk": 1,
+    "fields": {
+        "name": "Epub",
+        "description": "",
+        "virtual": true,
+        "slug": "epub"
+    }
+},
+{
+    "model": "books.bookformat",
+    "pk": 2,
+    "fields": {
+        "name": "Mobi",
+        "description": "",
+        "virtual": true,
+        "slug": "mobi"
+    }
+},
+{
+    "model": "books.bookformat",
+    "pk": 3,
+    "fields": {
+        "name": "PDF",
+        "description": "",
+        "virtual": false,
+        "slug": "pdf"
+    }
+},
+{
+    "model": "books.bookformat",
+    "pk": 4,
+    "fields": {
+        "name": "Book",
+        "description": "",
+        "virtual": false,
+        "slug": "book"
+    }
+}
+]

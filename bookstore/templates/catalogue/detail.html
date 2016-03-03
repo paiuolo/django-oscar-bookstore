@@ -33,7 +33,7 @@
     
     <h2 class="book_authors">
     {% for author in product.authors.all %}
-        <a href="/books/authors/{{author.pk}}">{{author.name}}</a>
+        <a href="{{author.get_absolute_url}}">{{author.name}}</a>
     {% endfor %}
     </h2>
     <h1>{{ product.get_title|upper }}</h1>
@@ -42,7 +42,7 @@
         <h4 class="book_traslation_authors">
         {% trans "Translation authors" %}:&nbsp;
         {% for author in product.translation_authors.all %}
-            <a href="/books/authors/{{author.pk}}">{{author.name}}</a>
+            <a href="{{author.get_absolute_url}}">{{author.name}}</a>
         {% endfor %}
         </h4>
     {% endif %}
