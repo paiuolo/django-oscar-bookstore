@@ -12,7 +12,7 @@
         "product_class": 1,
         "rating": null,
         "date_created": "2016-02-22T18:44:16.043Z",
-        "date_updated": "2016-03-03T17:45:10.164Z",
+        "date_updated": "2016-03-03T20:49:13.115Z",
         "is_discountable": true,
         "serie": 1,
         "form": null,
@@ -88,6 +88,146 @@
     }
 },
 {
+    "model": "catalogue.product",
+    "pk": 5,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 2,
+        "title": "",
+        "slug": "libro-1-pdf",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-03T20:48:49.252Z",
+        "date_updated": "2016-03-03T20:48:49.252Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 3,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 6,
+    "fields": {
+        "structure": "parent",
+        "upc": "",
+        "parent": null,
+        "title": "Libro 2",
+        "slug": "product2",
+        "description": "",
+        "product_class": 1,
+        "rating": null,
+        "date_created": "2016-03-04T21:27:16.334Z",
+        "date_updated": "2016-03-04T21:29:37.229Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": null,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 7,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 6,
+        "title": "",
+        "slug": "libro-2-ebook",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-04T21:28:13.425Z",
+        "date_updated": "2016-03-04T21:28:13.425Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 5,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 8,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 6,
+        "title": "",
+        "slug": "libro-2-epub",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-04T21:29:23.359Z",
+        "date_updated": "2016-03-04T21:29:23.359Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 1,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 9,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 6,
+        "title": "",
+        "slug": "libro-2-mobi",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-04T21:29:37.189Z",
+        "date_updated": "2016-03-04T21:29:37.190Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 2,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
     "model": "catalogue.productclass",
     "pk": 1,
     "fields": {
@@ -116,6 +256,14 @@
     "pk": 1,
     "fields": {
         "product": 2,
+        "category": 1
+    }
+},
+{
+    "model": "catalogue.productcategory",
+    "pk": 3,
+    "fields": {
+        "product": 6,
         "category": 1
     }
 },
@@ -178,6 +326,16 @@
         "description": "",
         "virtual": false,
         "slug": "book"
+    }
+},
+{
+    "model": "books.bookformat",
+    "pk": 5,
+    "fields": {
+        "name": "Ebook",
+        "description": "",
+        "virtual": true,
+        "slug": "ebook"
     }
 }
 ]

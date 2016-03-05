@@ -116,9 +116,11 @@ class SerieModelTest(ModelloNomeslugdescription, TestCase):
 
 
 class ProductModelTest(TestCase):
+    fixtures = ['test_models.json']
     @classmethod
     def setUpTestData(cls):
         cls.product_class = ProductClass.objects.create(name="Book")
+        
         
     def test_prodotto_tra_novità_i_primi_30_giorni_dalla_creazione(self):
         #c = Category.objects.create(name="cat1")
@@ -126,19 +128,16 @@ class ProductModelTest(TestCase):
         self.assertTrue(p.is_new)
         
     def test_prodotto_tra_novità_i_primi_30_giorni_dalla_pubblicazione(self):
-        t = ProductClass.objects.create(name="Book")
         #c = Category.objects.create(name="cat1")
         p = Product.objects.create(title="Prod1", product_class=self.product_class, publication_date=timezone.now())
         self.assertTrue(p.is_new)
         
     def test_prodotto_mostra_on_sale(self):
-        t = ProductClass.objects.create(name="Book")
         el1 = crea_modello(Product, title="Prod1", product_class=self.product_class)
         
         self.assertFalse(el1.is_on_sale)
         
     def test_prodotto_ha_num_pagine(self):
-        t = ProductClass.objects.create(name="Book")
         el1 = crea_modello(Product, title="Prod1", product_class=self.product_class)
         
         self.assertIsNone(el1.number_of_pages)
@@ -147,21 +146,38 @@ class ProductModelTest(TestCase):
         image_field = Product._meta.get_field('background_color')
             
     def test_prodotto_ha_pubdate(self):
-        t = ProductClass.objects.create(name="Book")
         el1 = crea_modello(Product, title="Prod1", product_class=self.product_class)
         
         self.assertIsNone(el1.publication_date)
             
     def test_prodotto_ha_campo_is_published(self):
-        t = ProductClass.objects.create(name="Book")
         el1 = crea_modello(Product, title="Prod1", product_class=self.product_class)
         
         self.assertTrue(hasattr(el1, 'is_published'))
         
     def test_prodotto_is_published_se_data_pubblicazione_antecedente_ad_ora(self):
-        t = ProductClass.objects.create(name="Book")
         p = Product.objects.create(title="Prod1", product_class=self.product_class, publication_date=timezone.now())
         self.assertTrue(p.is_published)
+
+    def test_prodotto_ha_campo_digital_variants_aggregator(self):
+        p1 = Product.objects.get(title='Libro 2')
+        self.assertTrue(hasattr(p1, 'digital_variants_aggregator'))
+
+    def test_prodotto_ha_campo_aggregated_children(self):
+        p1 = Product.objects.get(title='Libro 2')
+        self.assertTrue(hasattr(p1, 'aggregated_children'))
+        
+    def test_prodotto_aggregated_children_torna_tutti_se_non_presente_una_variante_ebook(self):
+        p1 = Product.objects.get(title='Libro 1')
+        self.assertEqual(p1.children.count(), p1.aggregated_children.count())
+        
+    def test_prodotto_torna_aggregated_children_con_sola_variante_virtuale_ebook(self):
+        p = Product.objects.get(title='Libro 2')
+        aggregated_children = p.aggregated_children
+        children = p.children.all()
+        self.assertNotEqual(len(aggregated_children), len(children))
+
+        
 
 #from oscar.apps.catalogue.models import Product, ProductClass, ProductAttribute
 

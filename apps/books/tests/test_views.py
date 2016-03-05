@@ -97,10 +97,10 @@ class ProductTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.product_class = ProductClass.objects.get(name="Book")
-        cls.product = crea_modello(Product, title="Prod1", product_class=cls.product_class, publication_date=timezone.now())
     
     def test_product_detail_does_not_show_price_before_pubdate(self):
-        response = self.client.get(self.product.get_absolute_url())
+        p = crea_modello(Product, title="Prod1", product_class=self.product_class, publication_date=timezone.now())
+        response = self.client.get(p.get_absolute_url())
         self.assertNotContains(response, 'variazione_prodotto')
         
     def test_product_detail_show_pubdate_before_pubdate(self):
@@ -108,9 +108,19 @@ class ProductTest(TestCase):
         response = self.client.get(p.get_absolute_url())
         self.assertContains(response, 'data_pubblicazione_prodotto')
         
+    def test_product_detail_shows_one_digital_variants_button_if_ebook_variant_specified(self):
+        p = Product.objects.get(title='Libro 2')
+        response = self.client.get(p.get_absolute_url())
+        contenuto = str(response.content)
+        num_butt = contenuto.count('variazione_prodotto')
+        self.assertEqual(num_butt, len(p.aggregated_children))
 
-
-
+    def test_product_detail_shows_all_digital_variants_button_if_ebook_variant_not_specified(self):
+        p = Product.objects.get(title='Libro 1')
+        response = self.client.get(p.get_absolute_url())
+        contenuto = str(response.content)
+        num_butt = contenuto.count('variazione_prodotto')
+        self.assertEqual(num_butt, len(p.aggregated_children))
 
 
 """

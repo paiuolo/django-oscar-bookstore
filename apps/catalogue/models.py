@@ -42,6 +42,25 @@ class Product(AbstractProduct):
     has_offers = models.BooleanField(default=False) #noqa
     
     @property
+    def digital_variants_aggregator(self):
+        #check there is an ebook form variant on parent product
+        p = self
+        if self.is_child:
+            p = self.parent
+        return p.children.filter(form__slug='ebook').first()
+
+    @property
+    def aggregated_children(self):
+        #return child proucts aggregated if there is the digital_variants_aggregator, all children andernfalls
+        digital_variants_aggregator = self.digital_variants_aggregator
+        p = self
+        if self.is_child:
+            p = self.parent
+        if digital_variants_aggregator:
+            return p.children.exclude(form__virtual=True) | p.children.filter(form__slug='ebook')
+        return p.children.all()
+            
+    @property
     def is_on_sale(self):
         return self.has_offers
     

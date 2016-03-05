@@ -102,10 +102,10 @@ class Serie(models.Model):
 
     class Meta:
         verbose_name_plural = _('series')
-        
+
     def num_books(self):
         return self.books.count()
-    
+
     def __str__(self):
         return self.name
 
