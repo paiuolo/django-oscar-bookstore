@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import CheckTwinDigitalProducts, FreeTwinDigitalProducts, AllProductsRange
 
+from django.conf import settings
+
 Range = get_model('offer', 'Range')
 CoverageCondition = get_model('offer', 'CoverageCondition')
 PercentageDiscountBenefit = get_model('offer', 'PercentageDiscountBenefit')
@@ -44,10 +46,11 @@ def create_twin_product_offer():
 class Applicator(_Applicator):
 
     def get_session_offers(self, request):
-        
-        try:
-            o1 = ConditionalOffer.objects.get(slug='remove-twin-products')
-        except:
-            o1 = create_twin_product_offer()
-        
-        return [o1,]
+        if settings.CHECK_TWIN_DIGITAL_PRODUCTS:
+            try:
+                o1 = ConditionalOffer.objects.get(slug='remove-twin-products')
+            except:
+                o1 = create_twin_product_offer()
+            
+            return [o1,]
+        return []

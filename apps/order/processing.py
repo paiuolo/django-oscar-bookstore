@@ -9,9 +9,12 @@ from oscar.core.loading import get_class
 from apps.books.tasks import send_order_via_email
 from apps.books.models import DigitalGood
 
+from django.conf import settings
+
 ShippingEventType = get_class('order.models', 'ShippingEventType')
 
 
+"""
 class EventHandler(_EventHandler):
     
     def handle_order_status_change(self, order, new_status, note_msg=None):
@@ -27,7 +30,7 @@ class EventHandler(_EventHandler):
         #print("\nEvento pagamento", event_type, amount)
         
         super(EventHandler, self).handle_payment_event(order, event_type, amount, lines, line_quantities, **kwargs)
-
+"""
 
 
 
@@ -47,8 +50,12 @@ def manage_order_after_payment(sender, **kwargs):
         dg = DigitalGood.objects.get_or_create(order=order, user=_user)
         email_address = _user.email
     
-    send_order_via_email.apply_async((email_address, order.number), countdown=10)
-    send_order_via_email(email_address, order.number)
+    if settings.CELERY_IS_ACTIVE:
+        send_order_via_email.apply_async((email_address, order.number), countdown=10)
+    else:
+        send_order_via_email(email_address, order.number)
     
-        
-order_placed.connect(manage_order_after_payment)
+
+if settings.SEND_ORDER_VIA_EMAIL:
+    order_placed.connect(manage_order_after_payment)
+    
