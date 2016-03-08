@@ -6,23 +6,25 @@ from django.utils.html import escape
 
 from apps.books.views import AuthorDetail, AuthorList
 
-from oscar.core.loading import get_class
+from oscar.core.loading import get_class, get_model
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 from decimal import Decimal as D
 
 Selector = get_class('partner.strategy', ('Selector'))
-Basket = get_class('basket.models', 'Basket')
-Product = get_class('catalogue.models', 'Product')
-ProductClass = get_class('catalogue.models', 'ProductClass')
-ProductCategory = get_class('catalogue.models', 'ProductCategory')
-Country = get_class('address.models', 'Country')
+Basket = get_model('basket', 'Basket')
+Product = get_model('catalogue', 'Product')
+ProductClass = get_model('catalogue', 'ProductClass')
+ProductCategory = get_model('catalogue', 'ProductCategory')
+Country = get_model('address', 'Country')
 Repository = get_class('shipping.repository', ('Repository'))
 OrderCreator = get_class('order.utils', 'OrderCreator')
 OrderTotalCalculator = get_class('checkout.calculators', 'OrderTotalCalculator')
-Partner = get_class('partner.models', 'Partner')
-StockRecord = get_class('partner.models', 'StockRecord')
+Partner = get_model('partner', 'Partner')
+StockRecord = get_model('partner', 'StockRecord')
+Order = get_model('order', 'Order')
+User = get_model('user', 'User')
 
 
 from django.conf import settings
@@ -116,12 +118,45 @@ class ProductTest(TestCase):
         self.assertEqual(num_butt, len(p.aggregated_children))
 
     def test_product_detail_shows_all_digital_variants_button_if_ebook_variant_not_specified(self):
-        p = Product.objects.get(title='Libro 1')
+        p = Product.objects.get(title='Libro 3')
         response = self.client.get(p.get_absolute_url())
         contenuto = str(response.content)
         num_butt = contenuto.count('variazione_prodotto')
         self.assertEqual(num_butt, len(p.aggregated_children))
 
+
+class CustomerTest(TestCase):
+    fixtures = ['test_models.json']
+    
+    def response_login(self, url):
+        url_library = reverse(url)
+        self.client.login(username='paiuolo@gmail.com', password='supercacca')
+        return self.client.get(url_library)
+    
+    def test_user_account_personal_library_is_protected(self):
+        url_library = reverse('customer:personal-library')
+        response = self.client.get(url_library, follow=True)
+        self.assertRedirects(response, '/accounts/login/?next={}'.format(url_library))
+    
+    def test_user_account_has_personal_library(self):
+        response = self.response_login('customer:personal-library')
+        self.assertTemplateUsed(response, 'customer/personal_library.html')
+        
+    def test_user_account_shows_order_button(self):
+        response = self.response_login('customer:profile-view')
+        self.assertContains(response, reverse('customer:personal-library'))
+    
+    def test_personal_library_contains_owned_products(self):
+        response = self.response_login('customer:personal-library')
+        user = User.objects.get(email='paiuolo@gmail.com')
+        
+        orders = Order.objects.filter(user=user)
+        products = []
+        for order in orders:
+            for l in order.lines.all():
+                products.append(l.product)
+                
+        self.assertEqual(response.context['products'], products)
 
 """
 

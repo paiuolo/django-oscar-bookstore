@@ -1,0 +1,68 @@
+{% extends "customer/baseaccountpage.html" %}
+{% load i18n %}
+{% load currency_filters %}
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="{{ homepage_url }}">{% trans 'Home' %}</a>
+        </li>
+        <li>
+            <a href="{% url 'customer:summary' %}">{% trans 'Account' %}</a>
+        </li>
+        <li class="active">{% trans 'Personal library' %}</li>
+    </ul>
+{% endblock %}
+
+{% block tabcontent %}
+
+    {% if products %}
+        
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>{% trans "Product" %}</th>
+                <th>{% trans "Options" %}</th>
+            </tr>
+            
+            
+            {% regroup products by parent as products_by_parent %}
+            
+            
+            {% for product in products_by_parent %}
+                <tr>
+                    <td>
+                        <h3>{{ product.grouper.get_title }}</h3>
+                        {% with image=product.grouper.primary_image %}
+                            {% thumbnail image.original "100x100" upscale=False as thumb %}
+                                <a href="{{ product.grouper.get_absolute_url }}">
+                                    <img class="thumbnail" src="{{ thumb.url }}" alt="{{ product.grouper.get_title }}"/>
+                                </a>
+                            {% endthumbnail %}
+                        {% endwith %}
+                   </td>
+                   <td>
+                   {% if product.grouper.digital_variants_aggregator %}
+                        {% for variant in product.grouper.children.all %}
+                            {%if variant.is_virtual %}
+                                <a class="btn download-variant">{{variant}}</a>
+                            {% endif %}
+                        {% endfor %}
+                   {% else %}
+                        {% for variant in product.list %}
+                            {%if variant.is_virtual %}
+                                <a class="btn download-variant">{{variant}}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                   </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% include "partials/pagination.html" %}
+    {% else %}
+        <p>{% trans "Your library is empty." %}</p>
+    {% endif %}
+
+{% endblock tabcontent %}

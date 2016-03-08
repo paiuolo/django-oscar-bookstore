@@ -12,13 +12,13 @@
         "product_class": 1,
         "rating": null,
         "date_created": "2016-02-22T18:44:16.043Z",
-        "date_updated": "2016-03-03T20:49:13.115Z",
+        "date_updated": "2016-03-05T09:02:28.466Z",
         "is_discountable": true,
         "serie": 1,
         "form": null,
         "background_color": "",
         "file": "",
-        "publication_date": null,
+        "publication_date": "2018-11-10T00:00:00Z",
         "number_of_pages": null,
         "has_offers": false,
         "product_options": [],
@@ -128,7 +128,7 @@
         "product_class": 1,
         "rating": null,
         "date_created": "2016-03-04T21:27:16.334Z",
-        "date_updated": "2016-03-04T21:29:37.229Z",
+        "date_updated": "2016-03-05T08:59:51.869Z",
         "is_discountable": true,
         "serie": null,
         "form": null,
@@ -156,7 +156,7 @@
         "product_class": null,
         "rating": null,
         "date_created": "2016-03-04T21:28:13.425Z",
-        "date_updated": "2016-03-04T21:28:13.425Z",
+        "date_updated": "2016-03-05T08:59:19.406Z",
         "is_discountable": true,
         "serie": null,
         "form": 5,
@@ -228,6 +228,118 @@
     }
 },
 {
+    "model": "catalogue.product",
+    "pk": 10,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 6,
+        "title": "",
+        "slug": "libro-2-book",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-05T08:59:51.816Z",
+        "date_updated": "2016-03-05T09:00:50.975Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 4,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 11,
+    "fields": {
+        "structure": "parent",
+        "upc": "",
+        "parent": null,
+        "title": "Libro 3",
+        "slug": "libro-3",
+        "description": "",
+        "product_class": 1,
+        "rating": null,
+        "date_created": "2016-03-07T10:57:34.929Z",
+        "date_updated": "2016-03-07T10:58:10.670Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": null,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 12,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 11,
+        "title": "",
+        "slug": "libro-3-epub",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-07T10:57:50.705Z",
+        "date_updated": "2016-03-07T10:57:50.705Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 1,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
+    "model": "catalogue.product",
+    "pk": 13,
+    "fields": {
+        "structure": "child",
+        "upc": "",
+        "parent": 11,
+        "title": "",
+        "slug": "libro-3-mobi",
+        "description": "",
+        "product_class": null,
+        "rating": null,
+        "date_created": "2016-03-07T10:58:10.597Z",
+        "date_updated": "2016-03-07T10:58:10.597Z",
+        "is_discountable": true,
+        "serie": null,
+        "form": 2,
+        "background_color": "",
+        "file": "",
+        "publication_date": null,
+        "number_of_pages": null,
+        "has_offers": false,
+        "product_options": [],
+        "authors": [],
+        "bookstores": [],
+        "translation_authors": []
+    }
+},
+{
     "model": "catalogue.productclass",
     "pk": 1,
     "fields": {
@@ -265,6 +377,285 @@
     "fields": {
         "product": 6,
         "category": 1
+    }
+},
+{
+    "model": "catalogue.productcategory",
+    "pk": 4,
+    "fields": {
+        "product": 11,
+        "category": 1
+    }
+},
+{
+    "model": "order.paymenteventquantity",
+    "pk": 1,
+    "fields": {
+        "event": 1,
+        "line": 1,
+        "quantity": 1
+    }
+},
+{
+    "model": "order.paymenteventquantity",
+    "pk": 2,
+    "fields": {
+        "event": 1,
+        "line": 2,
+        "quantity": 1
+    }
+},
+{
+    "model": "order.line",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "partner": 1,
+        "partner_name": "Store",
+        "partner_sku": "1",
+        "partner_line_reference": "",
+        "partner_line_notes": "",
+        "stockrecord": 1,
+        "product": 3,
+        "title": "Libro 1 [Epub]",
+        "upc": "",
+        "quantity": 1,
+        "line_price_incl_tax": "10.40",
+        "line_price_excl_tax": "10.00",
+        "line_price_before_discounts_incl_tax": "10.40",
+        "line_price_before_discounts_excl_tax": "10.00",
+        "unit_cost_price": null,
+        "unit_price_incl_tax": "10.40",
+        "unit_price_excl_tax": "10.00",
+        "unit_retail_price": null,
+        "status": "Pending",
+        "est_dispatch_date": null
+    }
+},
+{
+    "model": "order.line",
+    "pk": 2,
+    "fields": {
+        "order": 1,
+        "partner": 1,
+        "partner_name": "Store",
+        "partner_sku": "2",
+        "partner_line_reference": "",
+        "partner_line_notes": "",
+        "stockrecord": 2,
+        "product": 4,
+        "title": "Libro 1 [Mobi]",
+        "upc": "",
+        "quantity": 1,
+        "line_price_incl_tax": "0.00",
+        "line_price_excl_tax": "-0.40",
+        "line_price_before_discounts_incl_tax": "10.40",
+        "line_price_before_discounts_excl_tax": "10.00",
+        "unit_cost_price": null,
+        "unit_price_incl_tax": "10.40",
+        "unit_price_excl_tax": "10.00",
+        "unit_retail_price": null,
+        "status": "Pending",
+        "est_dispatch_date": null
+    }
+},
+{
+    "model": "order.lineprice",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "line": 1,
+        "quantity": 1,
+        "price_incl_tax": "10.40",
+        "price_excl_tax": "10.00",
+        "shipping_incl_tax": "0.00",
+        "shipping_excl_tax": "0.00"
+    }
+},
+{
+    "model": "order.lineprice",
+    "pk": 2,
+    "fields": {
+        "order": 1,
+        "line": 2,
+        "quantity": 1,
+        "price_incl_tax": "0.00",
+        "price_excl_tax": "0.00",
+        "shipping_incl_tax": "0.00",
+        "shipping_excl_tax": "0.00"
+    }
+},
+{
+    "model": "order.paymentevent",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "amount": "10.40",
+        "reference": "a943b5322fd46",
+        "event_type": 1,
+        "shipping_event": null,
+        "date_created": "2016-02-22T20:57:08.323Z"
+    }
+},
+{
+    "model": "order.paymenteventtype",
+    "pk": 1,
+    "fields": {
+        "name": "Settled",
+        "code": "settled"
+    }
+},
+{
+    "model": "order.orderdiscount",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "category": "Basket",
+        "offer_id": 1,
+        "offer_name": "Remove twin products",
+        "voucher_id": null,
+        "voucher_code": "",
+        "frequency": 1,
+        "amount": "10.40",
+        "message": ""
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 1,
+    "fields": {
+        "product": 3,
+        "partner": 1,
+        "partner_sku": "1",
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-02-22T18:44:38.495Z",
+        "date_updated": "2016-02-22T18:44:38.495Z"
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 2,
+    "fields": {
+        "product": 4,
+        "partner": 1,
+        "partner_sku": "2",
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-02-22T18:51:52.997Z",
+        "date_updated": "2016-02-22T18:51:52.997Z"
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 4,
+    "fields": {
+        "product": 7,
+        "partner": 1,
+        "partner_sku": "231",
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-03-05T08:59:19.424Z",
+        "date_updated": "2016-03-05T08:59:19.424Z"
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 5,
+    "fields": {
+        "product": 10,
+        "partner": 1,
+        "partner_sku": "156",
+        "price_currency": "EUR",
+        "price_excl_tax": "15.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-03-05T08:59:51.881Z",
+        "date_updated": "2016-03-05T09:00:51.002Z"
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 6,
+    "fields": {
+        "product": 12,
+        "partner": 1,
+        "partner_sku": "001",
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-03-07T10:57:50.887Z",
+        "date_updated": "2016-03-07T10:57:50.887Z"
+    }
+},
+{
+    "model": "partner.stockrecord",
+    "pk": 7,
+    "fields": {
+        "product": 13,
+        "partner": 1,
+        "partner_sku": "0002",
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_retail": null,
+        "cost_price": null,
+        "num_in_stock": null,
+        "num_allocated": null,
+        "low_stock_threshold": null,
+        "date_created": "2016-03-07T10:58:10.684Z",
+        "date_updated": "2016-03-07T10:58:10.684Z"
+    }
+},
+{
+    "model": "basket.line",
+    "pk": 1,
+    "fields": {
+        "basket": 1,
+        "line_reference": "3_1",
+        "product": 3,
+        "stockrecord": 1,
+        "quantity": 1,
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_incl_tax": "10.40",
+        "date_created": "2016-02-22T18:51:12.309Z"
+    }
+},
+{
+    "model": "basket.line",
+    "pk": 2,
+    "fields": {
+        "basket": 1,
+        "line_reference": "4_2",
+        "product": 4,
+        "stockrecord": 2,
+        "quantity": 1,
+        "price_currency": "EUR",
+        "price_excl_tax": "10.00",
+        "price_incl_tax": "10.40",
+        "date_created": "2016-02-22T18:52:03.378Z"
     }
 },
 {
@@ -336,6 +727,102 @@
         "description": "",
         "virtual": true,
         "slug": "ebook"
+    }
+},
+{
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$24000$f7mdUWH5AkDL$6blW1tv1H45zrjCHEf/VcpJNjhPZSbE3m798WYYy96o=",
+        "last_login": "2016-03-07T09:17:52.173Z",
+        "is_superuser": true,
+        "email": "paiuolo@gmail.com",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2016-01-30T22:15:18.284Z",
+        "newsletter_subscribed": true,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "books.digitalgood",
+    "pk": 1,
+    "fields": {
+        "date_created": "2016-02-22T20:57:08.261Z",
+        "user": 1,
+        "order": 1,
+        "downloads_remaining": 5,
+        "log": null
+    }
+},
+{
+    "model": "basket.basket",
+    "pk": 1,
+    "fields": {
+        "owner": 1,
+        "status": "Submitted",
+        "date_created": "2016-02-22T18:42:04.307Z",
+        "date_merged": null,
+        "date_submitted": "2016-02-22T20:57:08.346Z",
+        "vouchers": []
+    }
+},
+{
+    "model": "basket.basket",
+    "pk": 2,
+    "fields": {
+        "owner": 1,
+        "status": "Open",
+        "date_created": "2016-02-22T20:56:58.803Z",
+        "date_merged": null,
+        "date_submitted": null,
+        "vouchers": []
+    }
+},
+{
+    "model": "basket.basket",
+    "pk": 3,
+    "fields": {
+        "owner": null,
+        "status": "Merged",
+        "date_created": "2016-03-03T17:43:14.657Z",
+        "date_merged": "2016-03-03T17:43:46.159Z",
+        "date_submitted": null,
+        "vouchers": []
+    }
+},
+{
+    "model": "partner.partner",
+    "pk": 1,
+    "fields": {
+        "code": "store",
+        "name": "Store",
+        "users": []
+    }
+},
+{
+    "model": "order.order",
+    "pk": 1,
+    "fields": {
+        "number": "100001",
+        "site": 1,
+        "basket": 1,
+        "user": 1,
+        "billing_address": null,
+        "currency": "EUR",
+        "total_incl_tax": "10.40",
+        "total_excl_tax": "9.60",
+        "shipping_incl_tax": "0.00",
+        "shipping_excl_tax": "0.00",
+        "shipping_address": null,
+        "shipping_method": "No shipping required",
+        "shipping_code": "no-shipping-required",
+        "status": "Pending",
+        "guest_email": "paiuolo-buyer@gmail.com",
+        "date_placed": "2016-02-22T20:57:08.154Z"
     }
 }
 ]
