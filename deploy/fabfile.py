@@ -33,7 +33,6 @@ def install_python_deps(project_name):
 def clone_repo(project_name, repo_url):
     run('cd '+project_name+' && git clone '+repo_url)
     
-    
 def init_repo(project_name, repo_name):
     cmds = [
         'cd '+project_name,
@@ -48,3 +47,14 @@ def init_repo(project_name, repo_name):
         ]
     cmd = str.join(' && ', cmds)
     run(cmd)
+    
+def run_tests(project_name, repo_name):
+    cmds = [
+        'cd '+project_name,
+        'source virtualenv/bin/activate',
+        'cd '+repo_name,
+        './manage.py test apps.books',
+        ]
+    cmd = str.join(' && ', cmds)
+    run(cmd)
+    

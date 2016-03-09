@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # check argomenti e set variabili
-# exit if no action specified
-ACTION=$1
-[ -z "$ACTION" ] && echo "Specificare Azione" && exit 1
 # set remote host
-HOST_REMOTO=$2
+HOST_REMOTO=$1
 [ -z "$HOST_REMOTO" ] && echo "Specificare url o IP dell'host" && exit 1
 # set remote user
-NOME_UTENTE=$3
+NOME_UTENTE=$2
 [ -z "$NOME_UTENTE" ] && echo "Specificare l'utente dell'host" && exit 1
 # set project name
-PROJECT_NAME=$4
+PROJECT_NAME=$3
 [ -z "$PROJECT_NAME" ] && echo "Specificare il nome del progetto" && exit 1
-
+# exit if no action specified
+ACTION=$4
+[ -z "$ACTION" ] && echo "Specificare azione" && exit 1
 
 REPO_NAME="django-oscar-bookstore"
 REPO_URL="https://github.com/paiuolo/${REPO_NAME}.git"
@@ -42,7 +41,7 @@ case "$ACTION" in
     exit 0
     ;;
 "check")
-	fab -u $NOME_UTENTE -H $HOST_REMOTO lancia_test:$REPO_NAME -p $USER_PASS || exit 1
+	fab -u $NOME_UTENTE -H $HOST_REMOTO run_tests:$PROJECT_NAME,$REPO_NAME -p $USER_PASS || exit 1
 	exit 0
 	;;
 *)
