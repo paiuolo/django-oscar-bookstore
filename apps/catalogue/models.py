@@ -13,7 +13,8 @@ from datetime import timedelta
 
 from django.db.models import Q
 
-storage_magazzino_virtuale = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'magazzino_virtuale'))
+#storage_magazzino_virtuale = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'magazzino_virtuale'))
+storage_magazzino_virtuale = FileSystemStorage(location='/srv/django-oscar-bookstore/digital_products/')
 
 class Product(AbstractProduct):
     

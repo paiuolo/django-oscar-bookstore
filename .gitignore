@@ -10,3 +10,4 @@ public/static/*
 public/media/*/
 bookstore/logs/
 
+*.pyc

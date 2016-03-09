@@ -31,6 +31,7 @@ case "$ACTION" in
 "load")
 	fab -u $NOME_UTENTE -H $HOST_REMOTO install_deps:"$DEPS" -p $USER_PASS || exit 1
 	fab -u $NOME_UTENTE -H $HOST_REMOTO create_dir:$PROJECT_NAME -p $USER_PASS || exit 1
+	fab -u $NOME_UTENTE -H $HOST_REMOTO create_digital_files_dir:$REPO_NAME -p $USER_PASS || exit 1
 	fab -u $NOME_UTENTE -H $HOST_REMOTO create_virtualenv:$PROJECT_NAME -p $USER_PASS || exit 1
 	fab -u $NOME_UTENTE -H $HOST_REMOTO install_python_deps:$PROJECT_NAME -p $USER_PASS || exit 1
 	fab -u $NOME_UTENTE -H $HOST_REMOTO clone_repo:$PROJECT_NAME,$REPO_URL -p $USER_PASS || exit 1

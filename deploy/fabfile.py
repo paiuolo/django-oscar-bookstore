@@ -14,6 +14,9 @@ def install_deps(packages):
 
 def create_dir(project_name):
     run('mkdir -p '+project_name)
+    
+def create_digital_files_dir(repo_name):
+    run('su -c \'mkdir -p /srv/'+repo_name+' && mkdir -p /srv/'+repo_name+'/digital_products\'')
 
 def create_virtualenv(project_name):
     run('cd '+project_name+' && python3 -m venv virtualenv')

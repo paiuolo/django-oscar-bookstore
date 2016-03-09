@@ -82,6 +82,16 @@
     }
 },
 {
+    "model": "books.bookformat",
+    "pk": 5,
+    "fields": {
+        "name": "Ebook",
+        "description": "",
+        "virtual": true,
+        "slug": "ebook"
+    }
+},
+{
    "model": "partner.partner",
    "pk": 1,
    "fields": {
