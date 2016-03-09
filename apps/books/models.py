@@ -9,13 +9,15 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 import os
 
-from oscar.core.loading import get_class
+from oscar.core.loading import get_class, get_model
 
 from apps.user.models import User
 
-Order = get_class('order.models', 'Order')
-    
-    
+Order = get_model('order', 'Order')
+
+
+
+
 @python_2_unicode_compatible
 class Author(models.Model):
     name = models.CharField(_('name'), max_length=128)
@@ -206,10 +208,10 @@ class BookStore(models.Model):
 
 
 @python_2_unicode_compatible
-class DigitalGood(models.Model):
+class DigitalDownload(models.Model):
     date_created = models.DateTimeField(_('Date created'), auto_now_add=True)
     user = models.ForeignKey(User, verbose_name=_('User'))
-    order = models.ForeignKey(Order, verbose_name=_('Order'))
+    product = models.ForeignKey('catalogue.Product', verbose_name=_('Product'))
     downloads_remaining = models.PositiveIntegerField(default=5)
     log = models.TextField(blank=True, null=True)
     

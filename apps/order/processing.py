@@ -7,7 +7,6 @@ from oscar.core.loading import get_class
 
 #from apps.books.functions import send_order_via_email
 from apps.books.tasks import send_order_via_email
-from apps.books.models import DigitalGood
 
 from django.conf import settings
 
@@ -47,7 +46,6 @@ def manage_order_after_payment(sender, **kwargs):
     if order.is_anonymous:
         email_address = order.guest_email
     else:
-        dg = DigitalGood.objects.get_or_create(order=order, user=_user)
         email_address = _user.email
     
     if settings.CELERY_IS_ACTIVE:

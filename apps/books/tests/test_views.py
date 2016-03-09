@@ -157,6 +157,15 @@ class CustomerTest(TestCase):
                 products.append(l.product)
                 
         self.assertEqual(response.context['products'], products)
+        
+    def test_personal_library_listen_download_post(self):
+        self.client.login(username='paiuolo@gmail.com', password='supercacca')
+        request = self.client.post(reverse('customer:personal-library'), {'product_id': '1'})
+        print('Request', request)
+        
+    
+    def test_personal_library_permit_owned_download_only(self):
+        pass
 
 """
 

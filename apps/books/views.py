@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView, View, TemplateView
 from django.views.generic.edit import FormView
 
-from .models import Author, BookStore, Serie, DigitalGood
+from .models import Author, BookStore, Serie
 
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
@@ -37,9 +37,3 @@ class SerieDetail(DetailView):
 class SerieList(ListView):
     model = Serie
     template_name = 'books/serie_list.html'
-    
-    
-#class DigitalGoodDownload(DetailView):
-    #model = DigitalGood
-    #template_name = 'books/digital_good_download.html'
-    

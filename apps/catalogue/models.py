@@ -11,6 +11,8 @@ from apps.books.models import Author, Serie, BookFormat, BookStore
 from django.utils import timezone
 from datetime import timedelta
 
+from django.db.models import Q
+
 storage_magazzino_virtuale = FileSystemStorage(location=os.path.join(settings.BASE_DIR, 'magazzino_virtuale'))
 
 class Product(AbstractProduct):
@@ -57,8 +59,17 @@ class Product(AbstractProduct):
         if self.is_child:
             p = self.parent
         if digital_variants_aggregator:
-            return p.children.exclude(form__virtual=True) | p.children.filter(form__slug='ebook')
+            return p.children.filter(Q(form__virtual=False) | Q(form__slug='ebook'))
         return p.children.all()
+    
+    @property
+    def digital_children(self):
+        #return child virtual proucts aggregated without aggregator
+        p = self
+        if self.is_child:
+            p = self.parent
+        return p.children.filter(Q(form__virtual=True) & ~Q(form__slug='ebook'))
+        
             
     @property
     def is_on_sale(self):

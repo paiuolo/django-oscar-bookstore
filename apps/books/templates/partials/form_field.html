@@ -1,0 +1,17 @@
+{% extends "oscar/partials/form_field.html" %}
+
+{% load form_tags %}
+{% load widget_tweaks %}
+
+{% block widget %}
+    {% if field.widget_type == 'CheckboxInput' %}
+    <div>
+        <label for="{{ field.auto_id }}" class="{% if field.field.required %}required{% endif %}">
+            {{ field.label|safe }}
+            {% render_field field class+="" %}
+        </label>
+    </div>
+    {% else %}
+        {% render_field field class+="form-control" %}
+    {% endif %}
+{% endblock %}

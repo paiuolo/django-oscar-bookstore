@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    <input name="product_id" type="hidden" value="{{variant.pk}}">
+    <button class="btn download-variant" type="submit">{% trans "Download" %} {{variant}}</button>
+</form>&nbsp;

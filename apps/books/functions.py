@@ -4,6 +4,11 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from oscar.apps.customer.models import Email
 
+from oscar.core.loading import get_model
+
+Product = get_model('catalogue', 'Product')
+Order = get_model('order', 'Order')
+Line = get_model('order', 'Line')
 
 
 def carica_lines_digitali(order):
@@ -38,6 +43,36 @@ def carica_allegati_email(email, digital_lines):
         print('attacco digitale', path)
         if(os.path.isfile(path)):
             email.attach_file(path)
+            
+            
+def owned_products_pk(user):
+    orders = Order.objects.filter(user=user)
+    lines = Line.objects.none()
+    products = set()
+    for order in orders:
+        lines = lines | order.lines.all()
+    for line in lines:
+        if line.product.digital_variants_aggregator:
+            [products.add(p.pk) for p in line.product.digital_children]
+        else:
+            products.add(line.product.pk)
+    return list(products)
+    #return Product.objects.filter(pk__in=[p.pk for p in products])
+
+
+"""
+def owned_products_queryset(user):
+    orders = Order.objects.filter(user=user)
+        
+    products = []
+    for order in orders:
+        for l in order.lines.all():
+            products.append(l.product)
+            
+    pq = Product.objects.filter(id__in=[p.id for p in products])
+    print('PQ',pq)
+    return pq
+"""
 
 
 """
