@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 from oscar.defaults import *
-from bookstore.domain_secrets import *
+from bookstore import domain_secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = DOMAIN_SECRET_KEY
+SECRET_KEY = domain_secrets.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -194,16 +194,16 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 APPEND_SLASH = True
-ALLOWED_HOSTS = DOMAIN_ALLOWED_HOSTS
+ALLOWED_HOSTS = domain_secrets.ALLOWED_HOSTS
 
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = DOMAIN_LANGUAGE_CODE
+LANGUAGE_CODE = domain_secrets.LANGUAGE_CODE
 
-TIME_ZONE = DOMAIN_TIME_ZONE
+TIME_ZONE = domain_secrets.TIME_ZONE
 
 USE_I18N = True
 
@@ -211,7 +211,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = DOMAIN_LANGUAGES
+LANGUAGES = domain_secrets.LANGUAGES
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
@@ -254,7 +254,7 @@ THUMBNAIL_KEY_PREFIX = 'oscar-sandbox'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_SUBJECT_PREFIX = '[{}] '.format(DOMAIN_SHOP_NAME)
+EMAIL_SUBJECT_PREFIX = '[{}] '.format(domain_secrets.SHOP_NAME)
 # Email secrets
 from bookstore.email_secrets import *
 
@@ -270,17 +270,17 @@ CKEDITOR_CONFIGS = {
 
 
 # Oscar
-OSCAR_SHOP_NAME = DOMAIN_SHOP_NAME
-OSCAR_SHOP_TAGLINE = DOMAIN_SHOP_TAGLINE
+OSCAR_SHOP_NAME = domain_secrets.SHOP_NAME
+OSCAR_SHOP_TAGLINE = domain_secrets.SHOP_TAGLINE
 OSCAR_RECENTLY_VIEWED_PRODUCTS = 20
 OSCAR_ALLOW_ANON_CHECKOUT = True
 DISPLAY_VERSION = False
 
-OSCAR_DEFAULT_CURRENCY = DOMAIN_DEFAULT_CURRENCY
+OSCAR_DEFAULT_CURRENCY = domain_secrets.DEFAULT_CURRENCY
 
 OSCAR_ALLOW_ANON_REVIEWS = False
 
-OSCAR_FROM_EMAIL = DOMAIN_INFO_EMAIL
+OSCAR_FROM_EMAIL = domain_secrets.INFO_EMAIL
 OSCAR_HIDDEN_FEATURES = ['reviews']
 #OSCAR_HOMEPAGE
 
@@ -488,3 +488,10 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
+
+
+# bookstore
+NEW_PRODUCT_DAYS = domain_secrets.NEW_PRODUCT_DAYS
+CELERY_IS_ACTIVE = domain_secrets.CELERY_IS_ACTIVE
+SEND_ORDER_VIA_EMAIL = domain_secrets.SEND_ORDER_VIA_EMAIL
+CHECK_TWIN_DIGITAL_PRODUCTS = domain_secrets.CHECK_TWIN_DIGITAL_PRODUCTS
