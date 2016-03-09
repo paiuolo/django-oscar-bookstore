@@ -231,11 +231,8 @@ STATICFILES_DIRS = (
 )
 
 
-USE_LESS = True
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-)
-COMPRESS_ENABLED = True
+# less vars
+from bookstore.variables.less import *
 
 
 HAYSTACK_CONNECTIONS = {
