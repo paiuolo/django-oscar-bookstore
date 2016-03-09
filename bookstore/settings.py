@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 from oscar.defaults import *
-from bookstore import domain_secrets
+from bookstore.variables import domain_secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -256,7 +256,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_SUBJECT_PREFIX = '[{}] '.format(domain_secrets.SHOP_NAME)
 # Email secrets
-from bookstore.email_secrets import *
+from bookstore.variables.email_secrets import *
 
 
 # ckeditor
@@ -355,7 +355,7 @@ PAYPAL_BRAND_NAME = OSCAR_SHOP_NAME
 #PAYPAL_HEADER_IMG = "https://"
 #PAYPAL_CUSTOMER_SERVICES_NUMBER = "xxxx"
 # PayPal secrets
-from bookstore.paypal_secrets import *
+from bookstore.variables.paypal_secrets import *
 
 
 
