@@ -51,7 +51,7 @@
     <h3> {% trans "Books" %}: </h3>
     <div class="row-fluid serie-books">
         {% for product in serie.books.all %}
-            {% include "theme/rappresentazione_class.html" %}
+            {% include "catalogue/partials/product.html" %}
         {% endfor %}
     </div>
     {% endif %}
