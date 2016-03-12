@@ -31,22 +31,31 @@
     {% include "books/catalogue/categorie_inline.html" %}
     
     
-    <h2 class="book_authors">
-    {% for author in product.authors.all %}
-        <a href="{{author.get_absolute_url}}">{{author.name}}</a>
-    {% endfor %}
-    </h2>
+    
+    {% with authors as product.authors.all %}
+        {% if authors|length > 0 %}
+            <h2 class="book_authors">
+            {% for author in authors %}
+                <a href="{% url 'author_detail' author.slug %}">{{author.name}}</a>
+            {% endfor %}
+            </h2>
+        {% endif %}
+    {% endwith %}
+
     <h1>{{ product.get_title|upper }}</h1>
     
-    {% if product.translation_authors.all|length > 0 %}
-        <h4 class="book_traslation_authors">
-        {% trans "Translation authors" %}:&nbsp;
-        {% for author in product.translation_authors.all %}
-            <a href="{{author.get_absolute_url}}">{{author.name}}</a>
-        {% endfor %}
-        </h4>
-    {% endif %}
+    {% with translation_authors as product.translation_authors.all %}
+        {% if translation_authors|length > 0 %}
+            <h4 class="book_traslation_authors">
+            {% trans "Translation authors" %}:&nbsp;
+            {% for author in translation_authors %}
+                <a href="{% url 'author_detail' author.slug %}">{{author.name}}</a>
+            {% endfor %}
+            </h4>
+        {% endif %}
+    {% endwith %}
     
+
     {% if product.serie %}
         <h4 class="book_serie">
             {% trans "Serie" %}:
@@ -57,8 +66,8 @@
     
     <div class="variazioni_prodotto">
         {% include "books/catalogue/tasti_variazioni.html" %}
-        {% include "catalogue/partials/add_to_wishlist.html" %}
     </div> 
+    {% include "catalogue/partials/add_to_wishlist.html" %}
     
     {% block product_description %}
         <div class="product_description">

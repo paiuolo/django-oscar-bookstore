@@ -32,24 +32,26 @@
 
 {% block content %}
 
-<article class="author_page"><!-- Start of product page -->
+<article class="author"><!-- Start of product page -->
 
     <h1>{{author.name}}</h1>
     
-    <div class="author-description">
+    <div class="author_description">
     {{author.description|safe}}
     </div>
     
-    {% if author.books.all|length > 0%}
-    <h3> {% trans "Books" %}: </h3>
-    <div class="row-fluid author-books">
-        {% for product in author.books.all %}
+    {% with author.books.all as author_books %}
+    {% if author_books|length > 0%}
+    <div class="row-fluid author_books">
+        <h3> {% trans "Books" %}: </h3>
+        {% for product in author_books %}
             {% if product.is_parent %}
                 {% include "books/rappresentazione_miniatura.html" %}
             {% endif %}
         {% endfor %}
     </div>
     {% endif %}
+    {% endwith %}
 </article><!-- End of author page -->
 {% endblock content %}
 

@@ -47,14 +47,16 @@
     {{serie.description|safe}}
     </div>
     
-    {% if serie.books.all|length > 0%}
+    {% with serie.books.all as serie_books %}
+    {% if serie_books|length > 0%}
     <h3> {% trans "Books" %}: </h3>
     <div class="row-fluid serie-books">
-        {% for product in serie.books.all %}
-            {% include "catalogue/partials/product.html" %}
+        {% for product in serie_books %}
+            {% include "theme/rappresentazione_class.html" %}
         {% endfor %}
     </div>
     {% endif %}
+    {% endwith %}
 </article><!-- End of serie page -->
 {% endblock content %}
 
