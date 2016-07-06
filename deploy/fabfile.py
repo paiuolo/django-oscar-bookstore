@@ -15,8 +15,9 @@ def install_deps(packages):
 def create_dir(project_name):
     run('mkdir -p '+project_name)
     
-def create_digital_files_dir(repo_name):
-    run('su -c \'mkdir -p /srv/'+repo_name+' && mkdir -p /srv/'+repo_name+'/digital_products\'')
+def create_digital_files_dir(user_name, repo_name):
+    dfd = '/srv/'+repo_name+'/digital_products'
+    run('su -c \'mkdir -p /srv/'+repo_name+' && mkdir -p '+dfd+' && chown '+user_name+' '+dfd+'\'')
 
 def create_virtualenv(project_name):
     run('cd '+project_name+' && python3 -m venv virtualenv')
@@ -47,6 +48,16 @@ def init_repo(project_name, repo_name):
         './manage.py migrate',
         './manage.py oscar_populate_countries',
         './manage.py loaddata bookstore/fixtures/initial_data.json',
+        ]
+    cmd = str.join(' && ', cmds)
+    run(cmd)
+    
+def nginx_uwsgi_setup_config(project_name, repo_name, domain_name):
+    config_dir = repo_name+'/deploy/config/'
+    cmds = [
+        'cd '+project_name,
+        'sed -i -e "s:__DOMINIO__:'+domain_name+':g" ./'+config_dir+'nginx.conf -e "s:__CARTELLA__:"`pwd`":g" ./'+config_dir+'nginx.conf',
+        'sed -i -e "s:__DOMINIO__:'+domain_name+':g" ./'+config_dir+'uwsgi.ini -e "s:__CARTELLA__:"`pwd`":g" ./'+config_dir+'uwsgi.ini',
         ]
     cmd = str.join(' && ', cmds)
     run(cmd)
